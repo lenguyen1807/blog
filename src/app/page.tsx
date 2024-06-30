@@ -1,23 +1,14 @@
-import Image from "next/image";
+import ProfileGif from "@/components/profile-gif";
 
 export default function Home() {
   return (
     <div className="flex w-full flex-col gap-y-10">
       <section className="flex flex-col items-center gap-y-7">
-        <Image
-          src="/profile.gif"
-          alt="Profile photo"
-          style={{ width: "auto", height: "150px" }}
-          className="rounded-full"
-          sizes="100vw"
-          width={0}
-          height={0}
-        />
+        <ProfileGif />
         <div className="flex flex-col items-center gap-y-4">
           <h1 className="text-3xl font-bold">Le Nguyen</h1>
         </div>
       </section>
-
       <section className="flex flex-col gap-y-5 md:flex-row md:gap-y-0">
         <div className="text-xl md:w-1/3">
             <h2>About me</h2>
