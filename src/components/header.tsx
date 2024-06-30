@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { ModeToggle } from "./theme-toggle";
+import { Button } from "./ui/button";
 
 function LinkLabel({title, href} : {title: string, href: string}) {
     return (
         <Link
-            className="flex-none text-[1.05rem] text-muted-foreground hover:text-primary hover:underline underline-offset-2"
+            className="flex-none text-muted-foreground hover:text-primary"
             href={href}
         >
-            {title}
+            <Button variant="linkHover2" className="text-base">
+                {title}
+            </Button>
         </Link>
     )
 }
@@ -27,7 +30,7 @@ export default function Header() {
                 <div className="flex flex-row items-center justify-center gap-x-5 sm:gap-x-7">
                     <LinkLabel title="blog" href="/blog" />
                     <LinkLabel title="project" href="/project" />
-                    <LinkLabel title="cv" href="/resume.pdf" />
+                    <LinkLabel title="resume" href="/resume.pdf" />
                     <ModeToggle />
                 </div>
             </nav>

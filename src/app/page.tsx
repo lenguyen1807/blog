@@ -5,7 +5,7 @@ export default function Home() {
     <div className="flex w-full flex-col gap-y-10">
       <section className="flex flex-col items-center gap-y-7">
         <Image
-          src="https://avatars.githubusercontent.com/u/91407657"
+          src="/profile.gif"
           alt="Profile photo"
           style={{ width: "auto", height: "150px" }}
           className="rounded-full"
