@@ -4,16 +4,16 @@ import { IArticle } from "./interface";
 import { globby } from "globby";
 import path from "path";
 
-function ArticlePath(path: string) { 
+function ArticlePath(mdxpath: string) { 
     const articlePath = "src/contents"
     if (process.env.NODE_ENV === "production") {
-        return path.resolve(process.cwd(), articlePath);
+        return `${path.resolve(process.cwd(), articlePath)}/${mdxpath}`;
     }
-    return articlePath;
+    return `articlePath/${mdxpath}`;
 }
 
 export async function GetAllArticles() {
-    const articles = await globby(ArticlePath("/**/*.mdx"));
+    const articles = await globby(ArticlePath("**/*.mdx"));
 
     return Promise.all(
         articles.map(async (file) => {
