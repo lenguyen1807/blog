@@ -6,7 +6,7 @@ export const Markdown : MDXComponents = {
         return (
         <a
             {...props}
-            className="font-semibold text-primary underline underline-offset-4"
+            className="font-medium text-primary underline underline-offset-4"
         >
             {children}
         </a>
@@ -15,7 +15,7 @@ export const Markdown : MDXComponents = {
     h1: ({ children, className, ...props }) => {
         return (
             <h1 
-                className={cn("scroll-m-20 text-2xl font-extrabold tracking-tight", className)} 
+                className={cn("scroll-m-20 text-3xl font-extrabold tracking-tight", className)} 
                 {...props}
             >
                 {children}
@@ -25,17 +25,37 @@ export const Markdown : MDXComponents = {
     h2: ({ children, className, ...props }) => {
         return (
             <h2 
-                className={cn("mt-10 scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight transition-colors first:mt-0", className)}
+                className={cn("mt-10 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0", className)}
                 {...props}
             >
                 {children}
             </h2>
         )
     },
+    h3: ({ children, className, ...props }) => {
+        return (
+            <h3
+                className={cn("scroll-m-20 text-xl font-semibold tracking-tight", className)}
+                {...props}
+            >
+                {children}
+            </h3>
+        )
+    },
+    h4: ({ children, className, ...props }) => {
+        return (
+            <h4
+                className={cn("scroll-m-20 text-lg font-semibold tracking-tight", className)}
+                {...props}
+            >
+                {children}
+            </h4>
+        )
+    },
     p: ({ children, className, ...props }) => {
         return (
             <p 
-                className={cn("leading-7 text-lg [&:not(:first-child)]:mt-4 mb-3", className)}
+                className={cn("leading-7 text-base [&:not(:first-child)]:mt-4 mb-3", className)}
                 {...props}
             >
                 {children}

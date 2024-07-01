@@ -35,12 +35,13 @@ export default function ProfileGif() {
         <ContextMenu>
             <ContextMenuTrigger>
                 <Image
-                src={image}
-                alt="Profile photo"
-                style={{ width: "auto", height: "150px" }}
-                sizes="100vw"
-                width={0}
-                height={0}
+                    src={image}
+                    alt="Profile photo"
+                    style={{ width: "auto", height: "150px" }}
+                    sizes="100vw"
+                    width={0}
+                    height={0}
+                    unoptimized
                 />
             </ContextMenuTrigger>
             <ContextMenuContent>

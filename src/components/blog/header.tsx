@@ -1,5 +1,5 @@
 import { IArticle } from "@/lib/interface"
-import { cn, readingTime } from "@/lib/utils"
+import { cn, formatDate, readingTime } from "@/lib/utils"
 
 interface BlogHeaderProps {
     article: IArticle,
@@ -11,7 +11,7 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
         <div className={cn("space-y-4 my-10", className)}>
             <div className="animate flex items-center gap-1.5">
                 <div className="font-base text-base">
-                    {article.date}
+                    {formatDate(article.date)}
                 </div>
                 <span>{"/"}</span>
                 <div className="font-base text-base">

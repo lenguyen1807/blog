@@ -1,24 +1,29 @@
 import fs from "fs/promises";
 import matter from "gray-matter";
-import path from "path";
-import { ARTICLE_PATH } from "@/lib/const"
 import { IArticle } from "./interface";
+import { globby } from "globby";
+
+const ARTICLE_PATH = "src/contents"
 
 export async function GetAllArticles() {
-    const articlePath = path.resolve(process.cwd(), ARTICLE_PATH);
-    const articles = await fs.readdir(articlePath);
+    const articles = await globby(`${ARTICLE_PATH}/**/*.mdx`);
 
     return Promise.all(
-        articles
-        .filter((article) => path.extname(article) === ".mdx")
-        .map(async (article) => {
-            const filePath = `${articlePath}/${article}`
-            const fileName = article.split(".")[0];
-            const fileContent = await fs.readFile(filePath, "utf8");
-            const { data, content } = matter(fileContent);
+        articles.map(async (file) => {
+            const fileName = file.split("/").at(-1)?.split(".")[0];
+            const fileContent = await fs.readFile(file, "utf8");
+            const {data, content} = matter(fileContent);
+
             return {...data, body: content, name: fileName} as IArticle;
         })
     )
+}
+
+export async function GetAllArticlesSort() {
+    const articles = await GetAllArticles();
+    return articles.sort(
+        (a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
 }
 
 export async function GetArticleByName(name: string) {

@@ -10,7 +10,8 @@ type Props = {
 };
 
 const lora = Lora({
-    subsets: ["latin", "vietnamese"]
+    subsets: ["latin", "vietnamese"],
+    weight: "400"
 });
 
 export default async function Page({params} : Props) {
