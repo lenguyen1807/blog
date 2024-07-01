@@ -1,8 +1,9 @@
 export interface IArticle {
     title: string,
-    date: string,
+    create_date: string,
+    update_date: string,
     description: string,
-    thumbnail: string,
+    thumbnail?: string,
     tags: string[],
     body: string,
     name: string

@@ -14,7 +14,7 @@ interface BlogContentProps {
 
 export default async function BlogContent({content ,className} : BlogContentProps) {
     return (
-        <article className={cn("flex-grow break-words", className)}>
+        <article className={cn("flex-grow break-words text-base lg:text-lg", className)}>
             <MDXRemote 
                 source={content}
                 components={{ ...Markdown, ...MdxComponent }}
@@ -22,10 +22,6 @@ export default async function BlogContent({content ,className} : BlogContentProp
                     mdxOptions: {
                         rehypePlugins: [rehypeHightlight, rehypeKatex],
                         remarkPlugins: [remarkGfm, remarkMath],
-                        remarkRehypeOptions: {
-                            footnoteLabel: 'Notes',
-                            footnoteLabelTagName: 'h2'
-                        },
                         development: process.env.NODE_ENV === 'development',
                     },
                 }}

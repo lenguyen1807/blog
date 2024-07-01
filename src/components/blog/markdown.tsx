@@ -6,7 +6,7 @@ export const Markdown : MDXComponents = {
         return (
         <a
             {...props}
-            className="font-medium text-primary underline underline-offset-4"
+            className="font-medium text-muted-foreground underline underline-offset-4"
         >
             {children}
         </a>
@@ -25,7 +25,7 @@ export const Markdown : MDXComponents = {
     h2: ({ children, className, ...props }) => {
         return (
             <h2 
-                className={cn("mt-10 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0", className)}
+                className={cn("mt-10 scroll-m-20 pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0", className)}
                 {...props}
             >
                 {children}
@@ -35,7 +35,7 @@ export const Markdown : MDXComponents = {
     h3: ({ children, className, ...props }) => {
         return (
             <h3
-                className={cn("scroll-m-20 text-xl font-semibold tracking-tight", className)}
+                className={cn("mt-8 scroll-m-20 text-xl font-semibold tracking-tight", className)}
                 {...props}
             >
                 {children}
@@ -45,7 +45,7 @@ export const Markdown : MDXComponents = {
     h4: ({ children, className, ...props }) => {
         return (
             <h4
-                className={cn("scroll-m-20 text-lg font-semibold tracking-tight", className)}
+                className={cn("mt-8 scroll-m-20 text-lg font-semibold tracking-tight", className)}
                 {...props}
             >
                 {children}
@@ -55,7 +55,7 @@ export const Markdown : MDXComponents = {
     p: ({ children, className, ...props }) => {
         return (
             <p 
-                className={cn("leading-7 text-base [&:not(:first-child)]:mt-4 mb-3", className)}
+                className={cn("leading-7 [&:not(:first-child)]:mt-4 mb-3 hyphens-auto", className)}
                 {...props}
             >
                 {children}
@@ -94,14 +94,14 @@ export const Markdown : MDXComponents = {
     },
     li: ({ children, className, ...props }) => {
         return (
-            <li className={cn("text-lg", className)} {...props}>
+            <li className={cn("", className)} {...props}>
                 {children}
             </li>
         );
     },
     code: ({ children, className, ...props }) => {
         return (
-            <code className={cn("relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold", className)} {...props}>
+            <code className={cn("relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold", className)} {...props}>
                 {children}
             </code>
         )

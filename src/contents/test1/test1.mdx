@@ -1,16 +1,21 @@
 ---
 title: Testing MDX
-date: 03/24/2024
+create_date: 03/24/2024
+update_date: 03/27/2024
 description: In March, Google released a new Core Web Vital called Interaction to Next Paint (INP). It measures the speed of interactions with the website. In this article, you’ll learn more about INP from the developer’s perspective. I’ll guide you through testing for INP, verifying potential causes of low INP scores, and how you can leverage new React tools to optimize your website for recent changes.
-thumbnail: '/content/articles/optimizing-react-app-for-inp/thumbnail.webp'
+thumbnail: '/contents/test1/thumbnail.jpg'
 tags:
   - react
   - performance
 ---
 
-# This is lorem ipsum
+# This is heading 1
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt neque augue, sit amet tempus felis tempor sit amet. Etiam at tellus placerat, dictum lorem quis, ultrices nibh. Praesent quis aliquam diam. Pellentesque id tempus felis. Phasellus eget lacus mauris. Aenean consectetur leo ac aliquet consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam vitae nunc elit. Praesent pellentesque neque nisl, nec auctor turpis scelerisque eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+## This is heading 2
+
+### This is heading 3
+
+#### This is heading 4
 
 This is a link: [Duck Duck Go](https://duckduckgo.com)
 
@@ -77,5 +82,24 @@ This is table:
 | January  | $250    |
 | February | $80     |
 | March    | $420    |
+
+This is image import:
+<MdxImage
+  src="/contents/test1/thumbnail.jpg"
+  alt="Testing"
+  height="300"
+  width="600"
+  caption="This is testing image"
+  sizes="100vw"
+/>
+
+<MdxSidenote 
+  content={"this is the real sidenote"}
+  note={"this is sidenote"}
+/>
+
+This is task list:
+- [ ] Task 
+- [x] Task Complete
 
 [^1]: Footnote 1

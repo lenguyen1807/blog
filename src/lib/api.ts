@@ -9,7 +9,7 @@ function ArticlePath(mdxpath: string) {
     if (process.env.NODE_ENV === "production") {
         return `${path.resolve(process.cwd(), articlePath)}/${mdxpath}`;
     }
-    return `articlePath/${mdxpath}`;
+    return `${articlePath}/${mdxpath}`;
 }
 
 export async function GetAllArticles() {
@@ -29,7 +29,7 @@ export async function GetAllArticles() {
 export async function GetAllArticlesSort() {
     const articles = await GetAllArticles();
     return articles.sort(
-        (a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        (a,b) => new Date(b.update_date).getTime() - new Date(a.update_date).getTime()
     );
 }
 

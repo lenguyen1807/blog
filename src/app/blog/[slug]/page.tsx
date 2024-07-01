@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import BlogHeader from "@/components/blog/header";
 import BlogFooter from "@/components/blog/footer";
 import { Lora } from "next/font/google";
+import "@/styles/latex.css"
 
 type Props = {
     params: { slug: string };
@@ -24,7 +25,9 @@ export default async function Page({params} : Props) {
     return (
         <>
             <BlogHeader article={article} className={lora.className} />
-            <BlogContent content={article.body} className={lora.className} />
+            <div className="pt-6">
+                <BlogContent content={article.body} className={lora.className} />
+            </div>
             <BlogFooter />
         </>
     )

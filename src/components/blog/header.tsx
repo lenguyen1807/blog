@@ -1,5 +1,6 @@
 import { IArticle } from "@/lib/interface"
 import { cn, formatDate, readingTime } from "@/lib/utils"
+import Image from "next/image";
 
 interface BlogHeaderProps {
     article: IArticle,
@@ -8,10 +9,25 @@ interface BlogHeaderProps {
 
 export default function BlogHeader({article, className} : BlogHeaderProps) {
     return (
-        <div className={cn("space-y-4 my-10", className)}>
+        <div className={cn("space-y-6 my-10", className)}>
+            {
+                article.thumbnail && (
+                    <div className="aspect-h-9 aspect-w-16 mb-6">
+                        <Image 
+                            src={article.thumbnail}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            style={{ width: "auto", height: "auto"}}
+                            alt="Thumbnail Image"
+                            className="rounded-lg mx-auto"
+                        />
+                    </div>
+                )
+            }
             <div className="animate flex items-center gap-1.5">
                 <div className="font-base text-base">
-                    {formatDate(article.date)}
+                    {formatDate(article.create_date)}
                 </div>
                 <span>{"/"}</span>
                 <div className="font-base text-base">
@@ -20,6 +36,10 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
             </div>
             <div className="animate text-3xl lg:text-5xl font-semibold">
                 {article.title}
+            </div>
+            <div className="font-base text-base">
+                {"Last update: "}
+                {formatDate(article.create_date)}
             </div>
         </div>
     )

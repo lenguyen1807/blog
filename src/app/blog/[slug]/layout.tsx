@@ -9,6 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
     return (
+        <>
         <div className="w-full">
             <Button variant="outline" className="h-8 w-20">
                 <Link href="/blog" className="flex">
@@ -22,5 +23,6 @@ export default function RootLayout({
                 </Suspense>
             </div>
         </div>
+        </>
     )
 }

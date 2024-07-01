@@ -1,3 +1,5 @@
+// ref: https://github.com/letelete/letelete.github.io/blob/master/src/components/ui/atoms/mdx/mdx-youtube-embed.tsx
+
 import { cn } from "@/lib/utils";
 
 export interface MdxYoutubeProps {

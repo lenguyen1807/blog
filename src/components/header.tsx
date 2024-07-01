@@ -22,7 +22,7 @@ export default function Header() {
                 className="relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center"
             >
                 <Link
-                    className="flex-none hidden sm:block text-xl font-semibold"
+                    className="flex-none text-xl font-semibold"
                     href="/"
                 >
                     le nguyen's blog
@@ -31,10 +31,12 @@ export default function Header() {
                     <LinkLabel title="blog" href="/blog" />
                     <span className="text-muted-foreground">{"/"}</span>
                     <LinkLabel title="works" href="/works" />
-                    <span className="text-muted-foreground">{"/"}</span>
-                    <LinkLabel title="note" href="https://my-digital-garden-one-sigma.vercel.app/" />
-                    <span className="text-muted-foreground">{"/"}</span>
-                    <LinkLabel title="resume" href="/resume.pdf" />
+                    <div className="hidden sm:block">
+                        <span className="text-muted-foreground">{"/"}</span>
+                        <LinkLabel title="note" href="https://my-digital-garden-one-sigma.vercel.app/" />
+                        <span className="text-muted-foreground">{"/"}</span>
+                        <LinkLabel title="resume" href="/resume.pdf" />
+                    </div>
                     <ModeToggle />
                 </div>
             </nav>
