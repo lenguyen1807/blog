@@ -27,10 +27,13 @@ export default function Header() {
                 >
                     le nguyen's blog
                 </Link>
-                <div className="flex flex-row items-center justify-center sm:gap-x-7">
+                <div className="flex flex-row items-center justify-center">
                     <LinkLabel title="blog" href="/blog" />
-                    <LinkLabel title="project" href="/project" />
+                    <span className="text-muted-foreground">{"/"}</span>
+                    <LinkLabel title="works" href="/works" />
+                    <span className="text-muted-foreground">{"/"}</span>
                     <LinkLabel title="note" href="https://my-digital-garden-one-sigma.vercel.app/" />
+                    <span className="text-muted-foreground">{"/"}</span>
                     <LinkLabel title="resume" href="/resume.pdf" />
                     <ModeToggle />
                 </div>

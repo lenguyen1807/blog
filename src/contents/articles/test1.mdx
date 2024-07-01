@@ -1,0 +1,81 @@
+---
+title: Testing MDX
+date: Mar 24, 2024
+description: In March, Google released a new Core Web Vital called Interaction to Next Paint (INP). It measures the speed of interactions with the website. In this article, you’ll learn more about INP from the developer’s perspective. I’ll guide you through testing for INP, verifying potential causes of low INP scores, and how you can leverage new React tools to optimize your website for recent changes.
+thumbnail: '/content/articles/optimizing-react-app-for-inp/thumbnail.webp'
+tags:
+  - react
+  - performance
+---
+
+# This is lorem ipsum
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt neque augue, sit amet tempus felis tempor sit amet. Etiam at tellus placerat, dictum lorem quis, ultrices nibh. Praesent quis aliquam diam. Pellentesque id tempus felis. Phasellus eget lacus mauris. Aenean consectetur leo ac aliquet consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam vitae nunc elit. Praesent pellentesque neque nisl, nec auctor turpis scelerisque eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+This is a link: [Duck Duck Go](https://duckduckgo.com)
+
+Giả sử vào hôm nay, LN đi mua về một cái bánh mì, mình hỏi LN đã mua từ ai, LN không nói, thế nên mình đã đặt ra câu hỏi "biết rằng LN đã mua cái bánh mì, vậy xác suất LN mua cái bánh đó từ bà Hoa là bao nhiêu". Trước khi trả lời câu hỏi này, cùng mình đi sâu hơn một chút về xác suất.
+
+Xét hai biến ngẫu nhiên $X$ và $Y$, trong đó $X$ có thể nhận các giá trị $\{x_1, x_2, \dots, x_M\}$ và $Y$ có thể nhận các giá trị $\{y_{1}, \dots, y_{L}\}$. Tiếp theo ta thực hiện phép thử mà ta sẽ lấy ngẫu nhiên giá trị $X$ và $Y$. Ta thực hiện phép thử ấy trong $N$ lần, trong đó số lần thử mà $X = x_i$ và $Y = y_j$ xảy ra là $n_{ij}$. 
+
+Ta gọi xác suất mà $X = x_i$ và $Y = y_j$ cùng xảy ra là **xác suất đồng thời** của $X = x_i$ và $Y = y_j$, kí hiệu là $p(X = x_i, Y = y_j)$.  Như đã nói ở trên, $p(X = x_i, Y = y_j)$ chính là số lần thử mà $X = x_i$ và $Y = y_j$ xảy ra ($n_{ij}$) chia cho tổng số lần thử ($N$).
+
+> This is a blog quote
+
+This is a list:
+- Hihi
+- Huhu
+
+This is number list:
+1. Hihi
+2. Huhu
+
+Cứ quên anh vậy đi
+Nhạt nhoà sương tan ái ân mây trôi buồn
+Những môi hôn chìm sâu
+Còn đâu nụ cười thơ ngây đó
+Cứ xa anh vậy đi
+Đường mòn xưa kia dẫn lối đôi chân lẻ loi
+Anh lẻ loi
+
+This is inline math: $f(x) = 2x^2 + 3$
+
+This is block math:
+$$
+\int_{-\infty}^{\infty} \mathcal{N}(x \mid \mu, \sigma^2)
+$$
+
+This is footnote [^1].
+
+This is python code:
+```python
+def HelloWorld():
+  print("hello world")
+```
+
+This is typescript code:
+```ts
+export function Hihi(name: string) {
+  console.log(`Hello ${name}`)
+}
+```
+
+This is inline code `print("Helloworld")`.
+
+This is **bold** text and this is *italic* text.
+
+This play video:
+<MdxYoutube
+  src="LrB-fJn-3w4"
+  title='Typing a character into the search input, and observing changes in the UI'
+  caption='Simplified visualization of the INP'
+/>
+
+This is table:
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
+
+[^1]: Footnote 1

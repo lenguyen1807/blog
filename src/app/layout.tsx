@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "../modules/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Transition from "@/components/transition";
@@ -19,6 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+        <head>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossOrigin="anonymous" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"/>
+        </head>
         <body className={cn("min-h-screen bg-background font-sans antialiased flex justify-center", inter.variable)}>
           <ThemeProvider
             attribute="class"

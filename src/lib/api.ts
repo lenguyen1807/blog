@@ -1,21 +1,27 @@
 import fs from "fs/promises";
 import matter from "gray-matter";
 import path from "path";
+import { ARTICLE_PATH } from "@/lib/const"
+import { IArticle } from "./interface";
 
-export async function GetPosts(dirPath: string) {
-    const postPath = path.resolve(process.cwd(), dirPath);
-    const posts = await fs.readdir(postPath);
+export async function GetAllArticles() {
+    const articlePath = path.resolve(process.cwd(), ARTICLE_PATH);
+    const articles = await fs.readdir(articlePath);
 
     return Promise.all(
-        posts 
-        .filter((file) => path.extname(file) === ".mdx")
-        .map(async (file) => {
-            const filePath = `${postPath}/${file}`
-            const fileName = file.split(".")[0];
+        articles
+        .filter((article) => path.extname(article) === ".mdx")
+        .map(async (article) => {
+            const filePath = `${articlePath}/${article}`
+            const fileName = article.split(".")[0];
             const fileContent = await fs.readFile(filePath, "utf8");
             const { data, content } = matter(fileContent);
-
-            return {...data, body: content, name: fileName};
+            return {...data, body: content, name: fileName} as IArticle;
         })
     )
+}
+
+export async function GetArticleByName(name: string) {
+    const articles = await GetAllArticles();
+    return articles.find((article) => article.name === name)
 }
