@@ -2,11 +2,18 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import { IArticle } from "./interface";
 import { globby } from "globby";
+import path from "path";
 
-const ARTICLE_PATH = "src/contents"
+function ArticlePath(path: string) { 
+    const articlePath = "src/contents"
+    if (process.env.NODE_ENV === "production") {
+        return path.resolve(process.cwd(), articlePath);
+    }
+    return articlePath;
+}
 
 export async function GetAllArticles() {
-    const articles = await globby(`${ARTICLE_PATH}/**/*.mdx`);
+    const articles = await globby(ArticlePath("/**/*.mdx"));
 
     return Promise.all(
         articles.map(async (file) => {
