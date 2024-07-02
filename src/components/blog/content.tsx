@@ -16,10 +16,10 @@ interface BlogContentProps {
 
 export default async function BlogContent({content ,className} : BlogContentProps) {
     return (
-        <article className={cn("flex-grow break-words text-base lg:text-lg", className)}>
+        <article className={cn("flex-grow break-words prose dark:prose-invert lg:prose-lg", className)}>
             <MDXRemote 
                 source={content}
-                components={{ ...Markdown, ...MdxComponent }}
+                components={{ ...MdxComponent }}
                 options={{
                     mdxOptions: {
                         remarkPlugins: [remarkBreaks, remarkGfm, remarkMath],
