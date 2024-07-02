@@ -11,7 +11,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
     return (
-      <div className="grid gap-y-16">
+      <div className="grid gap-y-8">
         {children}
       </div>
     )

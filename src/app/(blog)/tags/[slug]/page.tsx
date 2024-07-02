@@ -14,9 +14,9 @@ export default async function Page({params} : Props) {
             <h1 className="text-xl lg:text-2xl items-center font-semibold flex">
                 <Tags className="mr-3" /> Tags: {params.slug}
             </h1>
-            <div className="grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
+            <div className="gap-y-16 sm:gap-x-8">
                 <section>
-                    <ul className="flex flex-col gap-y-12">
+                    <ul className="flex justify-start gap-y-12">
                         {articles.map((article) => {
                             return (
                                 <li key={article.name}>

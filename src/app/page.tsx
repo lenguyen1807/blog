@@ -1,12 +1,20 @@
-import ProfileGif from "@/components/profile-gif";
 import { TextSection } from "@/components/text-section";
 import { AboutMe } from "@/lib/const";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex w-full flex-col gap-y-10">
       <section className="flex flex-col items-center gap-y-7">
-        <ProfileGif />
+        <Image
+            src="/profile/dog1.gif"
+            alt="Profile photo"
+            style={{ width: "auto", height: "150px" }}
+            sizes="100vw"
+            width={0}
+            height={0}
+            unoptimized
+        />
         <div className="flex flex-col items-center gap-y-4">
           <h1 className="text-3xl font-bold">Le Nguyen 🍉</h1>
         </div>

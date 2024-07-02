@@ -2,6 +2,7 @@ import { GetAllArticles, GetAllArticlesSort, GetAllUniqueTags } from "@/lib/api"
 import { Tags } from "lucide-react";
 import BlogTags from "@/components/blog/tags";
 import ArticleCard from "@/components/blog/article-card";
+import Link from "next/link";
 
 export default async function Page() {
     const data = await GetAllArticles();
@@ -11,7 +12,7 @@ export default async function Page() {
     return (
         <div className="grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
             <section>
-                <ul className="flex flex-col gap-y-12">
+                <ul className="flex flex-col justify-start gap-y-12">
                     {articles.map((article) => {
                         return (
                             <li key={article.name}>

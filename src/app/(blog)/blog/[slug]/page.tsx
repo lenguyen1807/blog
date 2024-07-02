@@ -12,7 +12,7 @@ type Props = {
 
 const lora = Lora({
     subsets: ["latin", "vietnamese"],
-    weight: "400"
+    weight: "500"
 });
 
 export default async function Page({params} : Props) {
@@ -24,7 +24,7 @@ export default async function Page({params} : Props) {
 
     return (
         <>
-            <BlogHeader article={article} className={lora.className} />
+            <BlogHeader article={article} />
             <div className="pt-6">
                 <BlogContent content={article.body} className={lora.className} />
             </div>

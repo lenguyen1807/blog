@@ -52,7 +52,9 @@ export default function RootLayout({
   return (
     <html lang="en">
         <head>
+          {/* import katex */}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossOrigin="anonymous" />
+          {/* import hightlight.js */}
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"/>
         </head>
         <body className={cn("min-h-screen bg-background font-sans antialiased flex justify-center", inter.variable)}>

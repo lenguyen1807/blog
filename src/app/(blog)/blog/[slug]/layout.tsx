@@ -35,7 +35,7 @@ export default function Layout({
     return (
         <>
         <span className="border-l-2 pl-6 text-base">
-            <strong>Note:</strong> If you see a page loading too long, just press back button and click to it again. I'm sorry but I can't fix it for now 😞.
+            <strong>Note:</strong> If you see a page loading too long, just press back button and click to it again or reload it. I'm sorry but I can't fix it 😞.
         </span>
         <div className="w-full">
             <Button variant="outline" className="h-8 w-20">
