@@ -36,6 +36,15 @@ export async function GetArticleByName(name: string) {
     return articles.find((article) => article.name === name)
 }
 
+export async function GetArticleByTag(tag: string) {
+    const articles = await GetAllArticles();
+    return articles.filter((article) => {
+        if (article.tags) {
+            return article.tags.find(value => value === tag)
+        }
+    })
+}
+
 export function GetAllUniqueTags(articles: IArticle[]) {
     const tags = articles.flatMap((article) => {
         if (article.tags) {

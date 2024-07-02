@@ -34,6 +34,9 @@ export default function Layout({
 }>) {
     return (
         <>
+        <span className="border-l-2 pl-6 text-base">
+            <strong>Note:</strong> If you see a page loading too long, just press back button and click to it again. I'm sorry but I can't fix it for now 😞.
+        </span>
         <div className="w-full">
             <Button variant="outline" className="h-8 w-20">
                 <Link href="/blog" className="flex">
@@ -41,7 +44,7 @@ export default function Layout({
                     Back
                 </Link>
             </Button>
-            <div className="mt-8 gap-x-10 lg:items-start">
+            <div className="mt-8 gap-x-10 items-center justify-center">
                 <Suspense fallback={
                     <div className='flex h-full w-full items-center justify-center'>
                         Loading...

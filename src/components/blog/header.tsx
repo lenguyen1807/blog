@@ -1,7 +1,6 @@
 import { IArticle } from "@/lib/interface"
 import { cn, formatDate, readingTime } from "@/lib/utils"
 import Image from "next/image";
-import { Badge } from "../ui/badge";
 import BlogTags from "./tags";
 
 interface BlogHeaderProps {
