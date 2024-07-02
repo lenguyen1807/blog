@@ -2,8 +2,32 @@ import { Button } from "@/components/ui/button";
 import { Undo2 } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Metadata, ResolvingMetadata } from 'next';
+import { GetArticleByName } from "@/lib/api";
 
-export default function RootLayout({
+interface MetadataProps {
+  params: { slug: string };
+}
+
+export async function generateMetadata(
+  { params }: MetadataProps,
+  parent: ResolvingMetadata
+) {
+    const slug = params.slug;
+    const data = await GetArticleByName(slug);
+    const parentMeta = (await parent) as Metadata;
+
+    if (!data) {
+        return parentMeta;
+    }
+
+    return {
+        title: data?.title,
+        description: data?.description
+    } satisfies Metadata;
+}
+
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -18,7 +42,11 @@ export default function RootLayout({
                 </Link>
             </Button>
             <div className="mt-8 gap-x-10 lg:items-start">
-                <Suspense fallback={<span>Loading...</span>}>
+                <Suspense fallback={
+                    <div className='flex h-full w-full items-center justify-center'>
+                        Loading...
+                    </div>
+                }>
                     {children}
                 </Suspense>
             </div>

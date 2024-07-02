@@ -20,6 +20,19 @@
   \parindent =~ 17.625 * (72 / 72.27) / 12 = 1.463rem. */
 }
 
+.abstract,
+.abstract p {
+  text-align: center;
+  margin-top: 0;
+}
+.abstract {
+  margin: 2.25rem 0;
+}
+.abstract > h2 {
+  font-size: 1rem;
+  margin-bottom: -0.2rem;
+}
+
 /* Theorem */
 .theorem {
   counter-increment: theorem;
@@ -168,4 +181,16 @@ input.sidenote-toggle {
     margin-right: -25vw;
     width: 16vw;
   }
+}
+
+/* Make footnote text smaller and left align it (looks bad with long URLs) */
+.footnotes p {
+  text-align: left;
+  line-height: 1.5;
+  font-size: 85%;
+  margin-bottom: 0.4rem;
+}
+.footnotes {
+  border-top: 1px solid var(--footnotes-border-color);
+  margin-top: 2rem;
 }

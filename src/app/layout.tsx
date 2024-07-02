@@ -1,16 +1,49 @@
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Metadata, Viewport } from 'next'
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Transition from "@/components/transition";
+import { BASE_URL } from "@/lib/const";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | le nguyen's blog",
+    default: "le nguyen's blog",
+  },
+  description: "I'm an enthuasiaist in AI and Mathematics",
+  keywords: [
+    "Le Nguyen",
+    "AI",
+    "Deep Learning",
+    "Machine Learning",
+    "NextJS",
+    "Blog",
+    "Tutorial",
+    "Mathematics"
+  ],
+  authors: [{ name: "Le Nguyen" }],
+  creator: "Le Nguyen",
+  publisher: "Le Nguyen",
+  category: "technology",
+
+  // TODO: Add opengraph here
+}
 
 export default function RootLayout({
   children,

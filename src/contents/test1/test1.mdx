@@ -19,11 +19,35 @@ tags:
 
 This is a link: [Duck Duck Go](https://duckduckgo.com)
 
-Giả sử vào hôm nay, LN đi mua về một cái bánh mì, mình hỏi LN đã mua từ ai, LN không nói, thế nên mình đã đặt ra câu hỏi "biết rằng LN đã mua cái bánh mì, vậy xác suất LN mua cái bánh đó từ bà Hoa là bao nhiêu". Trước khi trả lời câu hỏi này, cùng mình đi sâu hơn một chút về xác suất.
+This is theorem and proof:
+<MdxMathBlock type="theorem">
+The real numbers $\mathbb{R}$ are uncountable.
+</MdxMathBlock>
 
-Xét hai biến ngẫu nhiên $X$ và $Y$, trong đó $X$ có thể nhận các giá trị $\{x_1, x_2, \dots, x_M\}$ và $Y$ có thể nhận các giá trị $\{y_{1}, \dots, y_{L}\}$. Tiếp theo ta thực hiện phép thử mà ta sẽ lấy ngẫu nhiên giá trị $X$ và $Y$. Ta thực hiện phép thử ấy trong $N$ lần, trong đó số lần thử mà $X = x_i$ và $Y = y_j$ xảy ra là $n_{ij}$. 
+<MdxMathBlock type="proof">
+If $\mathbb{R}$ is countable, then [0, 1] is countable as well. Hence there exists a map C from $\mathbb{N}$ onto [0, 1] with $$C(n)=\sum_{i=1}^{\infty} c_{i}(n) 10^{-i}$$ where $c_{i}(n) \in\{0,1, \ldots, 9\},$ are the digits in decimal expansion. Now consider a real number $$x=\sum_{i=1}^{\infty} \bar{c}_{i} 10^{-i}\in[0,1]$$ with $\bar{c}_{i} \neq c_{i}(i)$. Obviously $C(n) \neq x$ for all $n \in \mathbb{N} .$ Hence $C$ is not onto. A contradiction.
+</MdxMathBlock>
 
-Ta gọi xác suất mà $X = x_i$ và $Y = y_j$ cùng xảy ra là **xác suất đồng thời** của $X = x_i$ và $Y = y_j$, kí hiệu là $p(X = x_i, Y = y_j)$.  Như đã nói ở trên, $p(X = x_i, Y = y_j)$ chính là số lần thử mà $X = x_i$ và $Y = y_j$ xảy ra ($n_{ij}$) chia cho tổng số lần thử ($N$).
+<MdxMathBlock type="theorem">
+If $S$ is both countable and infinite, then there is a bijection between $S$ and $\boldsymbol{N}$ itself [^1].
+</MdxMathBlock>
+
+<MdxMathBlock type="lemma">
+An even number plus an even number results in an even number.
+</MdxMathBlock>
+
+<MdxMathBlock type="definition">
+A definition is a a statement of the meaning of a word or word group or a sign or symbol [^2].
+</MdxMathBlock>
+
+This is abstract:
+
+<MdxMathBlock type="abstract">
+Abstract
+<p>
+  This almost class-less CSS library turns your HTML document into a website that looks like a $\LaTeX$.
+</p>
+</MdxMathBlock>
 
 > This is a blog quote
 
@@ -102,4 +126,6 @@ This is task list:
 - [ ] Task 
 - [x] Task Complete
 
+
 [^1]: Footnote 1
+[^2]: “Definition.” Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/definition. Accessed 18 May. 2020.

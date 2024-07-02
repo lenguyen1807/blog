@@ -1,3 +1,8 @@
+export const BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? "http://localhost:3000"
+    : "https://le-nguyen-blog.vercel.app";
+
 export function AboutMe() {
     return (
         <div>
@@ -6,7 +11,7 @@ export function AboutMe() {
                 {"Le Nguyen, "}
             </span>
             {"currently a senior student at University of Science - VNU HCMC, majoring in Artificial Intelligence. "}
-            {"I'm passionate about AI Explainability and also a little bit Mathematics. "}
+            {"I'm passionate about AI and also a little bit Mathematics. "}
             {"This blog is created to share what I've learnt. "}
             {"Also, you can check my "}
             <a href="https://my-digital-garden-one-sigma.vercel.app/" className="hover:underline text-muted-foreground">
