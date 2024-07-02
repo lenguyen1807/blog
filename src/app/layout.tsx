@@ -7,7 +7,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Transition from "@/components/transition";
-import { BASE_URL } from "@/lib/const";
 
 const inter = Inter({
   subsets: ["latin"],

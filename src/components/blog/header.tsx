@@ -39,7 +39,7 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
             </div>
             <div className="font-base text-base">
                 {"Last update: "}
-                {formatDate(article.create_date)}
+                {formatDate(article.update_date)}
             </div>
         </div>
     )

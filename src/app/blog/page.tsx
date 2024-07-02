@@ -14,6 +14,9 @@ export default async function Page() {
 
     return (
         <div className="grid gap-y-16 sm:gap-x-8">
+            <span className="mt-6 border-l-2 pl-6 text-base">
+                <strong>Note:</strong> If you see a page loading too long, just press back button and click to it again. I'm sorry but I can't fix it for now 😞.
+            </span>
             <section>
                 <ul className="flex flex-col gap-y-12">
                     {articles.map((article) => {
