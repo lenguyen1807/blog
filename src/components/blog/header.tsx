@@ -45,7 +45,7 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
             </div>
             <div className="space-x-2">
                 {article.tags && article.tags.map((tag) => (
-                    <BlogTags tag={tag} className="sm:text-sm"/>
+                    <BlogTags tag={tag} className="sm:text-sm" key={tag}/>
                 ))}
             </div>
         </div>

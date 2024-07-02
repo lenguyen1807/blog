@@ -33,7 +33,7 @@ export default async function Page() {
                                     </Link>
                                     <div className="space-x-2">
                                         {article.tags && article.tags.map((tag) => (
-                                            <BlogTags tag={tag}/>
+                                            <BlogTags tag={tag} key={tag}/>
                                         ))}
                                     </div>
                                     <p className="line-clamp-3 block text-sm italic text-muted-foreground">

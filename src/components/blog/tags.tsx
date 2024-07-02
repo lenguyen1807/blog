@@ -2,9 +2,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 
-export interface BlogTagsProps {
+export interface BlogTagsProps extends React.HTMLAttributes<HTMLDivElement> {
     tag: string,
-    className?: string
 };
 
 export default function BlogTags({tag, className} : BlogTagsProps) {
