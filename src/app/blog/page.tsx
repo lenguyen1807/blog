@@ -1,22 +1,17 @@
-import { GetAllArticlesSort } from "@/lib/api"
+import { GetAllArticles, GetAllArticlesSort, GetAllUniqueTags } from "@/lib/api"
 import { cn, formatDate } from "@/lib/utils";
 import Link from "next/link";
-import { Lora } from "next/font/google";
-import Image from "next/image";
-
-const lora = Lora({
-    subsets: ["latin"],
-    style: "italic",
-})
+import { Badge } from "@/components/ui/badge";
+import { Tags } from "lucide-react";
+import BlogTags from "@/components/blog/tags";
 
 export default async function Page() {
-    const articles = await GetAllArticlesSort();
+    const data = await GetAllArticles();
+    const articles = GetAllArticlesSort(data);
+    const tags = GetAllUniqueTags(articles);
 
     return (
-        <div className="grid gap-y-16 sm:gap-x-8">
-            <span className="mt-6 border-l-2 pl-6 text-base">
-                <strong>Note:</strong> If you see a page loading too long, just press back button and click to it again. I'm sorry but I can't fix it for now 😞.
-            </span>
+        <div className="grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
             <section>
                 <ul className="flex flex-col gap-y-12">
                     {articles.map((article) => {
@@ -29,13 +24,18 @@ export default async function Page() {
                                 <span className="min-w-[120px]">
                                     {formatDate(article.update_date)}
                                 </span>
-                                <div className="space-y-3">
+                                <div className="space-y-2">
                                     <Link 
                                         href={`blog/${article.name}`}
-                                        className={cn("font-medium text-2xl hover:underline underline-offset-2", lora.className)} 
+                                        className={cn("font-medium text-xl hover:underline underline-offset-2")} 
                                     >
                                         {article.title}
                                     </Link>
+                                    <div className="space-x-2">
+                                        {article.tags && article.tags.map((tag) => (
+                                            <BlogTags tag={tag}/>
+                                        ))}
+                                    </div>
                                     <p className="line-clamp-3 block text-sm italic text-muted-foreground">
                                         {article.description}
                                     </p>
@@ -45,6 +45,21 @@ export default async function Page() {
                     })}
                 </ul>
             </section>
+            {tags.length > 0 && (
+                <aside>
+                    <h2 className="mb-4 flex items-center text-lg font-semibold">
+                        <Tags className="mr-2" />
+                        Tags
+                    </h2>
+                    <ul className="flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                            <li key={tag}>
+                                <BlogTags tag={tag} className="text-sm"/>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+            )}
         </div>
     )
 }
