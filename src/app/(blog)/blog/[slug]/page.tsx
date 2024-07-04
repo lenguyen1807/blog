@@ -5,6 +5,7 @@ import BlogHeader from "@/components/blog/header";
 import BlogFooter from "@/components/blog/footer";
 import { Lora } from "next/font/google";
 import "@/styles/latex.css"
+import "@/styles/pretty-code.css"
 
 type Props = {
     params: { slug: string };

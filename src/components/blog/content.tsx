@@ -1,6 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { MdxComponent } from "../mdx";
 import { cn } from "@/lib/utils";
+import { Options } from "rehype-pretty-code";
 
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
@@ -13,8 +14,7 @@ interface BlogContentProps {
     className?: string
 }
 
-/** @type {import('rehype-pretty-code').Options} */
-const options = {
+const options: Options = {
     keepBackground: false,
     theme: "one-dark-pro",
     defaultLang: {
