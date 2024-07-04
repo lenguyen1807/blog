@@ -1,0 +1,150 @@
+---
+title: Testing MDX
+create_date: 03/24/2024
+update_date: 03/27/2024
+description: In March, Google released a new Core Web Vital called Interaction to Next Paint (INP). It measures the speed of interactions with the website. In this article, you’ll learn more about INP from the developer’s perspective. I’ll guide you through testing for INP, verifying potential causes of low INP scores, and how you can leverage new React tools to optimize your website for recent changes.
+thumbnail: '/contents/test1/thumbnail.jpg'
+tags:
+  - react
+  - performance
+---
+
+# This is heading 1
+
+## This is heading 2
+
+### This is heading 3
+
+#### This is heading 4
+
+This is a link: [Duck Duck Go](https://duckduckgo.com)
+
+This is theorem and proof:
+<MdxMathBlock type="theorem">
+The real numbers $\mathbb{R}$ are uncountable.
+</MdxMathBlock>
+
+<MdxMathBlock type="proof">
+If $\mathbb{R}$ is countable, then [0, 1] is countable as well. Hence there exists a map C from $\mathbb{N}$ onto [0, 1] with $$C(n)=\sum_{i=1}^{\infty} c_{i}(n) 10^{-i}$$ where $c_{i}(n) \in\{0,1, \ldots, 9\},$ are the digits in decimal expansion. Now consider a real number $$x=\sum_{i=1}^{\infty} \bar{c}_{i} 10^{-i}\in[0,1]$$ with $\bar{c}_{i} \neq c_{i}(i)$. Obviously $C(n) \neq x$ for all $n \in \mathbb{N} .$ Hence $C$ is not onto. A contradiction.
+</MdxMathBlock>
+
+<MdxMathBlock type="theorem">
+If $S$ is both countable and infinite, then there is a bijection between $S$ and $\boldsymbol{N}$ itself [^1].
+</MdxMathBlock>
+
+<MdxMathBlock type="lemma">
+An even number plus an even number results in an even number.
+</MdxMathBlock>
+
+<MdxMathBlock type="definition">
+A definition is a a statement of the meaning of a word or word group or a sign or symbol [^2].
+</MdxMathBlock>
+
+This is abstract:
+
+<MdxMathBlock type="abstract">
+Abstract
+<p>
+  This almost class-less CSS library turns your HTML document into a website that looks like a $\LaTeX$.
+</p>
+</MdxMathBlock>
+
+> This is a blog quote
+
+This is a list:
+- Hihi
+- Huhu
+
+This is number list:
+1. Hihi
+2. Huhu
+
+Cứ quên anh vậy đi
+Nhạt nhoà sương tan ái ân mây trôi buồn
+Những môi hôn chìm sâu
+Còn đâu nụ cười thơ ngây đó
+Cứ xa anh vậy đi
+Đường mòn xưa kia dẫn lối đôi chân lẻ loi
+Anh lẻ loi
+
+This is inline math: $f(x) = 2x^2 + 3$
+
+This is block math:
+$$
+\int_{-\infty}^{\infty} \mathcal{N}(x \mid \mu, \sigma^2)
+$$
+
+This is footnote [^1].
+
+This is python code:
+```python
+def HelloWorld():
+  print("hello world")
+```
+
+This is typescript code:
+```ts {1-3,4}
+"use client"
+
+import { ChevronUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export default function BlogFooter() {
+    return (
+        <div className="pt-10">
+            <Button 
+                className="float-right"
+                variant="outline"
+                onClick={() => (window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                }))}
+            >
+                <ChevronUp className="h-5 w-5 mr-2" />
+                Go to top
+            </Button>
+        </div>
+    )
+}
+```
+
+This is inline code `print("Helloworld")`.
+
+This is **bold** text and this is *italic* text.
+
+This play video:
+<MdxYoutube
+  src="LrB-fJn-3w4"
+  title='Typing a character into the search input, and observing changes in the UI'
+  caption='Simplified visualization of the INP'
+/>
+
+This is table:
+| Month    | Savings |
+| :---: | :---: |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
+
+This is image import:
+<MdxImage
+  src="/contents/test1/thumbnail.jpg"
+  alt="Testing"
+  height="300"
+  width="600"
+  caption="This is testing image"
+  sizes="100vw"
+/>
+
+<MdxSidenote 
+  content={"this is the real sidenote"}
+  note={"this is sidenote"}
+/>
+
+This is task list:
+- [ ] Task 
+- [x] Task Complete
+
+
+[^1]: Footnote 1
+[^2]: “Definition.” Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/definition. Accessed 18 May. 2020.

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import type { PluginAPI } from "tailwindcss/types/config";
 
 const { fontFamily } = require("tailwindcss/defaultTheme")
 
@@ -72,14 +73,35 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "shine": {
+          from: { backgroundPosition: '200% 0' },
+          to: { backgroundPosition: '-200% 0' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "shine": "shine 8s ease-in-out infinite",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: {
+              borderRadius: 0,
+              paddingTop: 0,
+              paddingInlineEnd: 0,
+              paddingBottom: 0,
+              paddingInlineStart: 0
+            },
+          }
+        }
+      }
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config
 
 export default config
