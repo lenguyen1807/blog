@@ -1,18 +1,28 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Markdown } from "./markdown";
 import { MdxComponent } from "../mdx";
 import { cn } from "@/lib/utils";
 
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import remarkGfm from "remark-gfm";
-import rehypeHightlight from "rehype-highlight"
 import remarkBreaks from "remark-breaks";
+import rehypePrettyCode from "rehype-pretty-code";
 
 interface BlogContentProps {
     content: string,
     className?: string
 }
+
+/** @type {import('rehype-pretty-code').Options} */
+const options = {
+    keepBackground: false,
+    theme: "one-dark-pro",
+    defaultLang: {
+        block: "plaintext",
+        inline: "plaintext",
+    },
+    grid: true
+};
 
 export default async function BlogContent({content, className} : BlogContentProps) {
     return (
@@ -23,7 +33,7 @@ export default async function BlogContent({content, className} : BlogContentProp
                 options={{
                     mdxOptions: {
                         remarkPlugins: [remarkBreaks, remarkGfm, remarkMath],
-                        rehypePlugins: [rehypeKatex, rehypeHightlight],
+                        rehypePlugins: [rehypeKatex, [rehypePrettyCode, options]],
                         development: process.env.NODE_ENV === 'development',
                     },
                 }}
