@@ -52,8 +52,8 @@ function TocLink({toc} : {toc: IToc}) {
             href={`#${id}`}
             className={cn({
                 "text-base": toc.depth === 2,
-                "text-sm": toc.depth === 3,
-                "text-xs": toc.depth === 4
+                "text-sm pl-2": toc.depth === 3,
+                "text-xs pl-4": toc.depth === 4
             }, "py-1 hover:text-primary text-muted-foreground")}
             onClick={() => {
                 window.scrollTo({

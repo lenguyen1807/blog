@@ -1,0 +1,193 @@
+---
+title: Mình làm Blog này như thế nào ?
+create_date: 07/07/2024
+update_date: 07/07/2024
+tags: 
+    - software
+    - study 
+draft: true
+thumbnail: "/contents/how-to-make-blog/thumbnail.jpg"
+---
+
+## Lý do mà mình làm Blog này
+
+Vào năm nhất mình có làm blog bằng [Jekyll](https://jekyllrb.com/) và sau đó thì mình chuyển qua dùng [Hugo](https://gohugo.io/). Nhưng mà nghĩ lại, mình cần có thứ gì đó của riêng mình, ngoài ra cũng nhờ việc mình phải động đến front-end ở môn Công nghệ phần mềm cho AI và cũng là lần đầu tiên mình động đến cái gọi là [React](https://react.dev/) và mỗi một thứ (kể là rất nhỏ) thì cũng có thể cần đến thư viện riêng (yes, I'm looking at you, Javascript developer). Thế nhưng đây vẫn là thiên thời địa lợi đối với mình, ngại gì không làm một blog cho riêng mình.
+
+## Ý tưởng
+
+Nói trắng ra thì blog mình đã dùng đến 80% thiết kế đến từ trang này rồi [^1] (rất là cảm ơn luôn 😭). Lúc đầu mình nghĩ sẽ thực hiện trên framework [Astro](https://astro.build/), thì cơ bản đây là một framework để dùng build blog rất mạnh (ngoài ra cái xịn nhất là page transition được build native) thế nhưng mình lại không biết dùng (thật ra là dùng không quen) 🥲 nên do đó mình quay lại dùng framework mà mình đã làm ở môn CNPM cho AI đó là [NextJS](https://nextjs.org/) và làm blog trên NextJS thì hơi chật vật tí.
+
+## Cách mình làm
+
+Mình sẽ giả sử là các bạn đã biết cơ bản về NextJS rồi nhé, ví dụ như [App Router](https://nextjs.org/docs/app) (nói chung là NextJS mạnh và dễ dùng, dùng sai thì shoot yourself on the foot thôi 😈, với lại do mình chỉ biết duy nhất framework này nên chắc chắn bias nó rồi).
+
+Trước tiên là nói về những gì mình dùng:
+- NextJS: yeah sure chắc chắn là như vậy rồi. Và để update mới nhất, mình dùng NextJS 14.2 và App Router.
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote): đây là một thư viện dùng để xử lý các file [MDX](https://mdxjs.com/) (nó là markdown nhưng các bạn có thể thêm react component vào ấy).
+- Mình không dùng database nào để lưu post và lưu thẳng nó cùng với code, điều này có điểm tốt là dễ làm và điểm không tốt là không scale được, mình nghĩ khi nào số lượng post của mình nhiều, maybe 100 cái 🤷‍♂️ thì mình sẽ chuyển sang dùng database (à ngoài ra tại mình không biết làm).
+- Như các bạn thấy tên miền có phần `vercel.app` thì mình deploy cái blog này trên [Vercel](https://vercel.com), cái này dễ dùng, mình ấn 1-2 click là xong.
+- Còn về UI, thì mình sử dụng [TailwindCSS](https://tailwindcss.com/) (chủ yếu là chép từ [^1] thôi) và không thể thiếu là vị ân nhân của mình, thư viện [shadcn/ui](https://ui.shadcn.com/) (các button, link, animation gì đó đều được mình lấy từ thư viện này hết).
+- Ngoài ra còn rất nhiều cái lặt vặt khác, mình sẽ nói ở phần sau nhé.
+
+### Xử lý file MDX như thế nào ?
+
+Content mà các bạn thấy trong post này, hoàn toàn được viết bằng MDX và mình cần tìm một cách để xử lý được file MDX ấy, rồi đưa lên web và còn phần quan trọng, cách xử lý phải phù hợp với NextJS. 
+
+- Một file mdx của mình (ở post này) sẽ như thế này. Toàn bộ phần dưới dấu `---` là nơi để viết, còn trên đó là metadata.
+```mdx showLineNumbers
+---
+title: Mình làm Blog này như thế nào ?
+create_date: 07/07/2024
+update_date: 07/07/2024
+tags: 
+    - software
+    - study 
+draft: true
+thumbnail: "/contents/how-to-make-blog/thumbnail.jpg"
+---
+
+## Lý do mà mình làm Blog này
+```
+
+- Đầu tiên mình phải đọc và parse được file mdx ấy, để tách nó ra thành string, sau đó mới đưa cho `next-mdx-remote` xử lý string ấy. Mình dùng thư viện [globby](https://www.npmjs.com/package/globby) để đọc file (ngoài ra cái quan trọng là nó đọc được cả trong subdirectory). Sau khi đọc mình sẽ lấy tên file, lấy content và metadata của file (hay còn gọi là front-matter) bằng thư viện [gray-matter](https://www.npmjs.com/package/gray-matter).
+
+```ts showLineNumbers
+/* read all files have .mdx extension */
+const articles = await globby(ArticlePath("**/*.mdx"));
+
+return Promise.all(
+    articles.map(async (file) => {
+        const fileName = file.split("/").at(-1)?.split(".")[0];
+        const fileContent = await fs.readFile(file, "utf8");
+
+        // get file title, created_date, etc and file content
+        const {data, content} = matter(fileContent);
+
+        return {...data, body: content, name: fileName} as IArticle;
+    })
+)
+```
+
+- Sau khi đã có content của file, việc tiếp theo là mình sẽ đưa cho thư viện `next-mdx-remote` xử lý. Khi xử lý file MDX, `next-mdx-remote` sẽ trả về HTML, ta xem đó như là một component, vì vậy chỉ cần gọi ở nơi mà ta muốn post được display.
+
+```ts showLineNumbers
+import { MDXRemote } from "next-mdx-remote/rsc";
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "@/lib/other/slug";
+
+interface BlogContentProps {
+    content: string,
+    className?: string
+}
+
+export default async function BlogContent({
+    content, 
+    className
+} : BlogContentProps) {
+    return (
+        <article className={cn("flex-grow break-words prose", className)}>
+            <MDXRemote 
+                source={content}
+                components={{ ...MdxComponent }}
+                options={{
+                    mdxOptions: {
+                        remarkPlugins: [
+                            remarkBreaks, 
+                            remarkGfm, 
+                            remarkMath
+                        ],
+                        rehypePlugins: [
+                            rehypeSlug, 
+                            rehypeKatex, 
+                            [rehypePrettyCode, options]
+                        ],
+                    },
+                }}
+            />
+        </article>
+    )
+}
+```
+
+> Thế nhưng như thế vẫn chưa đủ đâu.
+
+- Đầu tiên việc format (hay style), ví dụ như Heading 1, ở MDX sẽ là `#` còn HTML sẽ là `h1`, hoặc tương tự như `h2`, `a`, ... thì `next-mdx-remote` sẽ không tự động xử lý cho mình, sẽ có 2 cách để thực hiện đó là tự xử lý 🥲 hoặc dùng thư viện [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography), khi đó mình chỉ cần thêm `prose` vào phần `className`, toàn bộ file MDX (hay nói đúng là HTML) của mình sẽ được xử lý hết (nó là style mà các bạn đang nhìn í).
+
+- Tiếp theo có thể thấy 2 thứ là [remark](https://github.com/remarkjs/remark) và [rehype](https://github.com/rehypejs/rehype) ở phần `mdxOptions`. Thì `remark` sẽ là thư viện để xử lý trên file Mardown (hay MDX) còn `rehype` sẽ là thư viện để xử lý trên HTML, vậy có nghĩa là, `next-mdx-remote` sẽ thực hiện `remark` trước sau đó đến `rehype`.
+
+- Các plugin remark mà mình sử dụng bao gồm [remark-breaks](https://github.com/remarkjs/remark-breaks), plugin này đơn giản là break các đoạn văn bản (kiểu cách dòng ấy), [remark-gfm](https://github.com/remarkjs/remark-gfm) dùng để style table như ở [Testing MDX](/blog/test) và cả footnote (và còn nhiều cái nữa mà mình chưa dùng đến). Cuối cùng là [remark-math](https://github.com/remarkjs/remark-math), như cái tên của nó thì plugin này giúp hiển thị được các công thức toán bằng $\LaTeX$, ngoài ra nó phải đi kèm với một plugin nữa để hiển thị đúng, ở đây là [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex).
+
+- Còn về rehype, mình dùng [rehype-pretty-code](https://rehype-pretty.pages.dev/) để tạo các block highlight code như các bạn thấ, [rehype-slug](https://github.com/rehypejs/rehype-slug) để gán id cho các header, do đó khi các bạn bấm Table of Contents thì nó mới di chuyển đến đúng header được (mình có sửa lại một chút theo ý mình để phù hợp với tiếng Việt).
+
+```ts showLineNumbers
+import MdxImage from "./image"
+import MdxMathBlock from "./math-block"
+import MdxSidenote from "./sidenote"
+import MdxYoutube from "./youtube"
+
+export const MdxComponent = {
+    MdxYoutube,
+    MdxImage,
+    MdxSidenote,
+    MdxMathBlock
+}
+```
+
+- Phần hay nữa đó chính là mình hoàn toàn có thể dùng React Component (jsx hoặc tsx) trong MDX bằng cách thêm vào ở option `components` trong `MDXRemote` component. Các MDX mà mình sử dụng thì các bạn có thể thấy ở đoạn code trên. Ví dụ như mình dùng `<MdxYoutube />` để embed video, hay `<MdxMathBlock />` để tạo các block math như Definition, Theorem, ... như dưới đây.
+
+```mdx
+<MdxMathBlock type="theorem">
+Bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông. Hay,
+$$
+a^2 = b^2 + c^2
+$$
+với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
+</MdxMathBlock>
+```
+
+<MdxMathBlock type="theorem">
+Bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông. Hay,
+$$
+a^2 = b^2 + c^2
+$$
+với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
+</MdxMathBlock>
+
+- Cool ha, việc sử dụng được React Component nên mình cảm giác nhét gì vào cũng được 🤣 (nhưng đủ khả năng làm không, không). Hay mình có thể embed video youtube vào.
+
+```mdx
+<MdxYoutube
+  src="VR9wmlmD2SA"
+  title="Gotta Lock In"
+  caption="Gotta Lock In"
+/>
+```
+
+<MdxYoutube
+  src="VR9wmlmD2SA"
+  title="Gotta Lock In"
+  caption="Gotta Lock In"
+/>
+
+### Implement một số cái bên lề
+
+> Mình lười viết nên đợi thôi 🚧
+
+### Các chức năng cần thêm
+
+- [ ] Add Google Analytics and Search Console.
+- [ ] Add SEO.
+- [ ] Better Table of Contents (maybe nằm ở bên phải or trái).
+- [ ] Post Search.
+- [ ] Page transition (cái này NextJS không support native nên khoai ác 😭, hiện tại mình có làm nhưng nhìn lôm côm quá, page được page không).
+- [ ] Pagination.
+- [ ] View Counter (kiểu xem có bao nhiêu người xem post mình rồi, maybe I don't need it because it's always 0).
+- [ ] Post Comment.
+- [ ] Dùng database.
+- [ ] Improve MDX Loading Time (chắc phải đổi thư viện hoặc skill issues 😞).
+
+[^1]: https://astro-theme-resume.vercel.app/

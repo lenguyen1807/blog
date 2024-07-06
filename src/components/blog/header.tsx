@@ -38,10 +38,12 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
             <div className="animate text-3xl lg:text-5xl font-semibold">
                 {article.title}
             </div>
-            <div className="font-base text-base">
-                {"Last update: "}
-                {formatDate(article.update_date)}
-            </div>
+            {article.update_date && 
+                <div className="font-base text-base">
+                    {"Last update: "}
+                    {formatDate(article.update_date)}
+                </div>
+            }
             <div className="space-x-2">
                 {article.tags && article.tags.map((tag) => (
                     <BlogTags tag={tag} className="sm:text-sm" key={tag}/>

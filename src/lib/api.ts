@@ -15,6 +15,7 @@ function ArticlePath(mdxpath: string) {
 }
 
 export async function GetAllArticles() {
+    /* read all files have .mdx extension */
     const articles = await globby(ArticlePath("**/*.mdx"));
 
     return Promise.all(
