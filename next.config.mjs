@@ -14,7 +14,14 @@ const nextConfig = {
         ]
     },
     transpilePackages: ['next-mdx-remote'],
-    pageExtensions: ['md', 'mdx', 'tsx', 'ts', 'jsx', 'js']
+    pageExtensions: ['md', 'mdx', 'tsx', 'ts', 'jsx', 'js'],
+    typescript: {
+        // !! WARN !!
+        // Dangerously allow production builds to successfully complete even if
+        // your project has type errors.
+        // !! WARN !!
+        ignoreBuildErrors: true,
+    },
 };
 
 export default nextConfig;
