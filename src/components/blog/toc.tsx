@@ -2,8 +2,6 @@
 
 import { IToc } from "@/lib/interface";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { ChevronsUpDown, Plus, X } from "lucide-react"
 import {
   Accordion,
   AccordionContent,
@@ -29,12 +27,6 @@ export default function Toc({tocs, className} : TocProps) {
                 </AccordionContent>
             </AccordionItem>
         </Accordion>
-        // <aside className={cn(className, "space-y-4")}>
-        //     <h2 className="text-base flex items-center">
-        //         Table of contents
-        //     </h2>
-        //     <RenderToc tocs={tocs} />
-        // </aside>
     )
 }
 
@@ -56,7 +48,7 @@ function TocLink({toc} : {toc: IToc}) {
     const id = toc.data.id;
 
     return (
-        <Link 
+        <a 
             href={`#${id}`}
             className={cn({
                 "text-base": toc.depth === 2,
@@ -70,6 +62,6 @@ function TocLink({toc} : {toc: IToc}) {
             }}
         >
             {toc.value}
-        </Link>
+        </a>
     )
 }
