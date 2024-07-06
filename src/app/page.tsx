@@ -1,4 +1,6 @@
-import { TextSection } from "@/components/text-section";
+import ResumeCard from "@/components/misc/resume-card";
+import TextSection from "@/components/misc/text-section";
+import ProjectCard from "@/components/misc/project-card";
 import { AboutMe } from "@/lib/const";
 import Image from "next/image";
 
@@ -19,16 +21,40 @@ export default function Home() {
           <h1 className="text-3xl font-bold">Le Nguyen 🍉</h1>
         </div>
       </section>
-      <section className="flex flex-col gap-y-5 md:flex-row md:gap-y-0">
-        <div className="text-xl md:w-1/3">
-            <h2>About me</h2>
-        </div>
-        <div className="flex flex-col gap-y-3 md:w-2/3">
-          <TextSection>
-            <AboutMe />
-          </TextSection>
-        </div>
-      </section>
+      <TextSection title="About me">
+        <AboutMe />
+      </TextSection>
+      <TextSection title="Education">
+        <ResumeCard 
+          heading="University of Science - VNU HCMC (BSc)"
+          subheading="Major in Artificial Intelligence"
+          date="Sep 2021 - Sep 2025"
+          imgPath="/homepage/hcmus-logo.webp"
+          height="70px"
+        />
+      </TextSection>
+      <TextSection title="Projects">
+        <ProjectCard 
+          heading="Bobo Library"
+          subheading="Project for CSC10011 - Software Engineering for AI Course"
+          date="2024"
+          imgPath="/homepage/bobo-homepage.png"
+          href="https://github.com/lenguyen1807/Software-for-AI"
+        />
+        <ProjectCard 
+          heading="Road Image Segmentation"
+          subheading="Project for CSC16004 - Computer Vision Course"
+          date="2024"
+          imgPath="/homepage/attentionUnet.png"
+          href="https://github.com/lenguyen1807/HCMUS-CSC16004-Computer-Vision/tree/main/Project"
+        />
+      </TextSection>
+      <TextSection title="Certification">
+        <ResumeCard 
+          heading="Coursera: Deep Learning Specialization"
+          date="Sep 2024"
+        />
+      </TextSection>
     </div>
   );
 }

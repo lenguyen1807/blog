@@ -83,19 +83,6 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shine": "shine 8s ease-in-out infinite",
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            pre: {
-              borderRadius: 0,
-              paddingTop: 0,
-              paddingInlineEnd: 0,
-              paddingBottom: 0,
-              paddingInlineStart: 0
-            },
-          }
-        }
-      }
     },
   },
   plugins: [

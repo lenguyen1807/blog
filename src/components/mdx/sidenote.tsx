@@ -3,17 +3,21 @@ import "@/styles/latex.css"
 export interface MdxSidenoteProps {
     note: string,
     content: string,
+    id: string,
 }
 
 export default function MdxSidenote ({
     note,
-    content
+    content,
+    id,
 } : MdxSidenoteProps) {
     return (
-        <div className="mt-10">
+        <>
             {content}
-            <label className="sidenote-number sidenote-toggle" />
-            <aside className="sidenote">{note}</aside>
-        </div>
+            <label htmlFor={id} className="sidenote-toggle sidenote-number">
+            </label>
+            <input type="checkbox" id={id} className="sidenote-toggle" />
+            <span className="sidenote">{note}</span>
+        </>
     )
 }

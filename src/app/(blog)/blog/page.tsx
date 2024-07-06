@@ -2,7 +2,6 @@ import { GetAllArticles, GetAllArticlesSort, GetAllUniqueTags } from "@/lib/api"
 import { Tags } from "lucide-react";
 import BlogTags from "@/components/blog/tags";
 import ArticleCard from "@/components/blog/article-card";
-import Link from "next/link";
 
 export default async function Page() {
     const data = await GetAllArticles();

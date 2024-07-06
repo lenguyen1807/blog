@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Noto_Sans, Nunito, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata, Viewport } from 'next'
@@ -9,8 +9,8 @@ import Footer from "@/components/footer";
 import Transition from "@/components/transition";
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-sans"
 });
 
 export const viewport: Viewport = {
