@@ -1,3 +1,10 @@
+export interface IToc {
+    value: string,
+    depth: number,
+    data: any,
+    children: IToc[]
+}
+
 export interface IArticle {
     title: string,
     create_date: string,
@@ -7,4 +14,5 @@ export interface IArticle {
     tags: string[],
     body: string,
     name: string
+    toc: IToc[]
 }

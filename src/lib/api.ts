@@ -2,6 +2,8 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import { IArticle } from "./interface";
 import { globby } from "globby";
+import { remark } from "remark";
+import { headingTree } from "@/lib/other/tree";
 import path from "path";
 
 function ArticlePath(mdxpath: string) { 
@@ -19,8 +21,16 @@ export async function GetAllArticles() {
         articles.map(async (file) => {
             const fileName = file.split("/").at(-1)?.split(".")[0];
             const fileContent = await fs.readFile(file, "utf8");
+
+            // get file title, created_date, etc and file content
             const {data, content} = matter(fileContent);
-            return {...data, body: content, name: fileName} as IArticle;
+
+            // get table of content
+            const toc = await remark()
+                        .use(headingTree)
+                        .process(content)
+                        .then((data) => data.headings);
+            return {...data, body: content, name: fileName, toc: toc} as IArticle;
         })
     )
 }

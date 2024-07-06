@@ -6,6 +6,8 @@ import BlogFooter from "@/components/blog/footer";
 import { Lora } from "next/font/google";
 import "@/styles/latex.css"
 import "@/styles/pretty-code.css"
+import Toc from "@/components/blog/toc";
+import { cn } from "@/lib/utils";
 
 type Props = {
     params: { slug: string };
@@ -13,7 +15,6 @@ type Props = {
 
 const lora = Lora({
     subsets: ["latin", "vietnamese"],
-    weight: "500"
 });
 
 export default async function Page({params} : Props) {
@@ -24,12 +25,21 @@ export default async function Page({params} : Props) {
     }
 
     return (
-        <>
-            <BlogHeader article={article} />
-            <div className="pt-6">
-                <BlogContent content={article.body} className={lora.className} />
+        <div 
+            className={cn(lora.className)}
+        >
+            <BlogHeader 
+                article={article} 
+            />
+            <div className="space-y-12 pt-8">
+                <Toc 
+                    tocs={article.toc} 
+                />
+                <BlogContent 
+                    content={article.body} 
+                />
             </div>
             <BlogFooter />
-        </>
+        </div>
     )
 }

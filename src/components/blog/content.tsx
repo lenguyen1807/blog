@@ -8,6 +8,7 @@ import remarkMath from 'remark-math';
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "@/lib/other/slug";
 
 interface BlogContentProps {
     content: string,
@@ -26,14 +27,14 @@ const options: Options = {
 
 export default async function BlogContent({content, className} : BlogContentProps) {
     return (
-        <article className={cn("flex-grow break-words prose prose-blue dark:prose-invert lg:prose-lg", className)}>
+        <article className={cn("flex-grow break-words prose prose-rose dark:prose-invert lg:prose-lg", className)}>
             <MDXRemote 
                 source={content}
                 components={{ ...MdxComponent }}
                 options={{
                     mdxOptions: {
                         remarkPlugins: [remarkBreaks, remarkGfm, remarkMath],
-                        rehypePlugins: [rehypeKatex, [rehypePrettyCode, options]],
+                        rehypePlugins: [rehypeSlug, rehypeKatex, [rehypePrettyCode, options]],
                         development: process.env.NODE_ENV === 'development',
                     },
                 }}

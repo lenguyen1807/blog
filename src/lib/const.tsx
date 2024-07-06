@@ -6,18 +6,18 @@ export const BASE_URL =
 export function AboutMe() {
     return (
         <div>
-            {"Hi my name is "}
+            {"Hello my name is "}
             <span className="text-pink-400">
-                {"Le Nguyen, "}
+                {"Le Nguyen. "}
             </span>
-            {"currently a senior student at University of Science - VNU HCMC, majoring in Artificial Intelligence. "}
-            {"I'm passionate about AI and also a little bit Mathematics. "}
+            {"I'm currently a senior student at University of Science - VNU HCMC, majoring in Artificial Intelligence. "}
+            {"I'm passionate about AI and Mathematics as well. "}
             {"This blog is created to share what I've learnt. "}
             {"Also, you can check my "}
             <a href="https://my-digital-garden-one-sigma.vercel.app/" className="hover:underline text-muted-foreground">
                 {"note page "}
             </a>
-            {"to see more detail notes (but for now it's only in Vietnamese)."}
+            {"to see more detailed notes (though currently, it's only available in Vietnamese)."}
         </div>
     )
 }

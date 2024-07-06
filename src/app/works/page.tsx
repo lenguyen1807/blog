@@ -1,7 +1,7 @@
 export default function Page() {
     return (
         <>
-            This is works page
+        I don't have a job yet 😭
         </>
     )
 }

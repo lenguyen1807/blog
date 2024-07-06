@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function BlogFooter() {
     return (
-        <div className="pt-10">
+        <div>
             <Button 
                 className="float-right"
                 variant="outline"

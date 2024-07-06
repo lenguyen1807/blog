@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Undo2 } from "lucide-react";
+import { Loader2, Undo2 } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Metadata, ResolvingMetadata } from 'next';
@@ -35,7 +35,7 @@ export default function Layout({
     return (
         <>
         <span className="border-l-2 pl-6 text-base">
-            <strong>Note:</strong> If you see a page loading too long, just press back button and click to it again or reload it. I'm sorry but I can't fix it 😞.
+            <strong>Note:</strong> If you see a page loading for too long, just press back button and click to it again or reload it. I'm sorry but I can't fix it 😞.
         </span>
         <div className="w-full">
             <Button variant="outline" className="h-8 w-20">
@@ -47,6 +47,7 @@ export default function Layout({
             <div className="mt-8 gap-x-10 items-center justify-center">
                 <Suspense fallback={
                     <div className='flex h-full w-full items-center justify-center'>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Loading...
                     </div>
                 }>
