@@ -1,3 +1,5 @@
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
@@ -23,5 +25,9 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
 };
+
+const bundle = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 export default nextConfig;

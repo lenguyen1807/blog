@@ -44,7 +44,6 @@ export default function Layout({
                     Back
                 </Link>
             </Button>
-            <div className="mt-8 gap-x-10 items-center justify-center">
                 <Suspense fallback={
                     <div className='flex h-full w-full items-center justify-center'>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -53,7 +52,6 @@ export default function Layout({
                 }>
                     {children}
                 </Suspense>
-            </div>
         </div>
         </>
     )
