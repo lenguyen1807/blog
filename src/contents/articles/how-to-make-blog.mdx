@@ -9,8 +9,6 @@ draft: true
 thumbnail: "/contents/how-to-make-blog/thumbnail.jpg"
 ---
 
-> Toàn bộ source code nằm ở [github.com/lenguyen18072003/blog](https://github.com/lenguyen1807/blog).
-
 ## Lý do mà mình làm Blog này
 
 Vào năm nhất mình có làm blog bằng [Jekyll](https://jekyllrb.com/) và sau đó thì mình chuyển qua dùng [Hugo](https://gohugo.io/). Nhưng mà nghĩ lại, mình cần có thứ gì đó của riêng mình, ngoài ra cũng nhờ việc mình phải động đến front-end ở môn Công nghệ phần mềm cho AI và cũng là lần đầu tiên mình động đến cái gọi là [React](https://react.dev/) và mỗi một thứ (kể là rất nhỏ) thì cũng có thể cần đến thư viện riêng (yes, I'm looking at you, Javascript developer). Thế nhưng đây vẫn là thiên thời địa lợi đối với mình, ngại gì không làm một blog cho riêng mình.
@@ -74,6 +72,9 @@ return Promise.all(
 
 ```ts showLineNumbers
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { MdxComponent } from "../mdx";
+import { cn } from "@/lib/utils";
+
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import remarkGfm from "remark-gfm";
@@ -105,7 +106,7 @@ export default async function BlogContent({
                         rehypePlugins: [
                             rehypeSlug, 
                             rehypeKatex, 
-                            [rehypePrettyCode, options]
+                            [rehypePrettyCode, {}]
                         ],
                     },
                 }}
@@ -121,7 +122,7 @@ export default async function BlogContent({
 
 - Tiếp theo có thể thấy 2 thứ là [remark](https://github.com/remarkjs/remark) và [rehype](https://github.com/rehypejs/rehype) ở phần `mdxOptions`. Thì `remark` sẽ là thư viện để xử lý trên file Mardown (hay MDX) còn `rehype` sẽ là thư viện để xử lý trên HTML, vậy có nghĩa là, `next-mdx-remote` sẽ thực hiện `remark` trước sau đó đến `rehype`.
 
-- Các plugin remark mà mình sử dụng bao gồm [remark-breaks](https://github.com/remarkjs/remark-breaks), plugin này đơn giản là break các đoạn văn bản (kiểu cách dòng ấy), [remark-gfm](https://github.com/remarkjs/remark-gfm) dùng để style table như ở [Testing MDX](/blog/test) và cả footnote (và còn nhiều cái nữa mà mình chưa dùng đến). Cuối cùng là [remark-math](https://github.com/remarkjs/remark-math), như cái tên của nó thì plugin này giúp hiển thị được các công thức toán bằng $\LaTeX$, ngoài ra nó phải đi kèm với một plugin nữa để hiển thị đúng, ở đây là [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex).
+- Các plugin remark mà mình sử dụng bao gồm [remark-breaks](https://github.com/remarkjs/remark-breaks), plugin này đơn giản là break các đoạn văn bản (kiểu cách dòng jjấy), [remark-gfm](https://github.com/remarkjs/remark-gfm) dùng để style table như ở [Testing MDX](/blog/test1) và cả footnote (và còn nhiều cái nữa mà mình chưa dùng đến). Cuối cùng là [remark-math](https://github.com/remarkjs/remark-math), như cái tên của nó thì plugin này giúp hiển thị được các công thức toán bằng $\LaTeX$, ngoài ra nó phải đi kèm với một plugin nữa để hiển thị đúng, ở đây là [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex).
 
 - Còn về rehype, mình dùng [rehype-pretty-code](https://rehype-pretty.pages.dev/) để tạo các block highlight code như các bạn thấ, [rehype-slug](https://github.com/rehypejs/rehype-slug) để gán id cho các header, do đó khi các bạn bấm Table of Contents thì nó mới di chuyển đến đúng header được (mình có sửa lại một chút theo ý mình để phù hợp với tiếng Việt).
 
