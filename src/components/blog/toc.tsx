@@ -3,12 +3,6 @@
 import { IToc } from "@/lib/interface";
 import { cn } from "@/lib/utils";
 import { useHighlighted } from "@/lib/other/get-hightlight";
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from "@/components/ui/accordion"
 
 interface TocProps extends React.HTMLAttributes<HTMLDivElement> {
     tocs: IToc[],
@@ -20,16 +14,8 @@ export default function Toc({tocs, className} : TocProps) {
     }
 
     return (
-        // <Accordion type="single" collapsible className={cn("relative w-fit", className)}>
-        //     <AccordionItem value="toc">
-        //         <AccordionTrigger className="text-base">Table of Contents</AccordionTrigger>
-        //         <AccordionContent>
-        //             <RenderToc tocs={tocs} />
-        //         </AccordionContent>
-        //     </AccordionItem>
-        // </Accordion>
         <div className="relative w-fit space-y-2">
-            <h2 className="text-lg border-b-2">Table of Contents</h2>
+            <h2 className="text-xl border-b-2">Table of Contents</h2>
             <RenderToc tocs={tocs} />
         </div>
     )
@@ -59,9 +45,9 @@ function TocLink({toc} : {toc: IToc}) {
         <a 
             href={`#${id}`}
             className={cn({
-                "text-base": toc.depth === 2,
-                "text-sm pl-2": toc.depth === 3,
-                "text-xs pl-4": toc.depth === 4,
+                "text-lg": toc.depth === 2,
+                "text-base pl-2": toc.depth === 3,
+                "text-sm pl-4": toc.depth === 4,
                 "text-primary": highlighted,
                 "text-muted-foreground": !highlighted,
             }, "py-1 hover:text-primary")}

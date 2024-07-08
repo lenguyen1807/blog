@@ -1,4 +1,4 @@
-import { Inter, Noto_Sans, Nunito, Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata, Viewport } from 'next'
@@ -15,12 +15,12 @@ const inter = Inter({
 
 export const viewport: Viewport = {
   width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 }
 
 export const metadata: Metadata = {
+  verification: {
+    google: "IXEnsPVZr2kilN8R7cEUNCEafBriaxF56diq5mhRdGg",
+  },
   title: {
     template: "%s | le nguyen's blog",
     default: "le nguyen's blog",
