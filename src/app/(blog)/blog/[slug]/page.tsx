@@ -25,21 +25,15 @@ export default async function Page({params} : Props) {
     }
 
     return (
-        <div 
-            className={cn(lora.className)}
-        >
-            <BlogHeader 
-                article={article} 
-            />
-            <div className="space-y-12 pt-8">
-                <Toc 
-                    tocs={article.toc} 
-                />
-                <BlogContent 
-                    content={article.body} 
-                />
+        <div className={cn(lora.className)}>
+            <div className="mt-8 gap-x-10 items-center justify-center">
+                <BlogHeader article={article} />
+                <aside className="lg:sticky top-20 order-2 -me-28 basis-60 lg:mr-[-10vw] lg:float-right lg:clear-right pb-6">
+                    <Toc tocs={article.toc} />
+                </aside>
+                <BlogContent content={article.body} />
+                <BlogFooter />
             </div>
-            <BlogFooter />
         </div>
     )
 }

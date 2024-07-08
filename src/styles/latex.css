@@ -97,15 +97,14 @@
   float: right;
   clear: right;
   width: 18vw;
-  margin-right: -20vw;
+  margin-right: -18vw;
   margin-bottom: 1em;
   text-indent: 0;
 }
 
 .sidenote.left {
   float: left;
-  font-size: 0.8rem;
-  margin-left: -20vw;
+  margin-left: -12vw;
   margin-bottom: 1em;
   text-indent: 0;
 }
