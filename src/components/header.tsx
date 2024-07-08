@@ -30,7 +30,7 @@ export default function Header() {
                 <div className="flex flex-row items-center justify-center">
                     <LinkLabel title="blog" href="/blog" />
                     <span className="text-muted-foreground">{"/"}</span>
-                    <LinkLabel title="works" href="/works" />
+                    <LinkLabel title="projects" href="/projects" />
                     <div className="hidden sm:block">
                         <span className="text-muted-foreground">{"/"}</span>
                         <LinkLabel title="note" href="https://my-digital-garden-one-sigma.vercel.app/" />

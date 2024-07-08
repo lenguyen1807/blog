@@ -33,22 +33,6 @@ export default function Home() {
           height="70px"
         />
       </TextSection>
-      <TextSection title="Projects">
-        <ProjectCard 
-          heading="Bobo Library"
-          subheading="Project for CSC10011 - Software Engineering for AI Course. Using NextJS."
-          date="2024"
-          imgPath="/homepage/bobo-homepage.png"
-          href="https://github.com/lenguyen1807/Software-for-AI"
-        />
-        <ProjectCard 
-          heading="Road Image Segmentation"
-          subheading="Project for CSC16004 - Computer Vision Course. Using Pytorch."
-          date="2024"
-          imgPath="/homepage/attentionUnet.png"
-          href="https://github.com/lenguyen1807/HCMUS-CSC16004-Computer-Vision/tree/main/Project"
-        />
-      </TextSection>
       <TextSection title="Certification">
         <ResumeCard 
           heading="Coursera: Deep Learning Specialization"

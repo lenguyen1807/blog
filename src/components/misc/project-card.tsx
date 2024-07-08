@@ -38,7 +38,7 @@ export default function ProjectCard({
                         sizes="100vw"
                         width={0}
                         height={0}
-                        className={cn("w-full rounded-2xl rounded-bl-none rounded-br-none", height)}
+                        className={cn("w-auto rounded-2xl rounded-bl-none rounded-br-none border-b-2 border-border", height)}
                     />
                 }
                 <Link href={href}>
