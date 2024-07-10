@@ -16,7 +16,7 @@ export default async function Page({params} : Props) {
             </h1>
             <div className="gap-y-16 sm:gap-x-8">
                 <section>
-                    <ul className="flex justify-start gap-y-12">
+                    <ul className="justify-start space-y-8">
                         {articles.map((article) => {
                             return (
                                 <li key={article.name}>

@@ -8,7 +8,7 @@ export interface BlogTagsProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function BlogTags({tag, className} : BlogTagsProps) {
     return (
-        <Link href={`/tags/${tag}`}>
+        <Link href={`/blog/tags/${tag}`}>
             <Badge 
                 className={cn(className, "hover:bg-muted-foreground hover:text-primary")} 
                 variant="outline"
