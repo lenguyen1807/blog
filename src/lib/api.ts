@@ -38,7 +38,11 @@ export async function GetAllArticles() {
 
 export function GetAllArticlesSort(articles: IArticle[]) {
     return articles.sort(
-        (a,b) => new Date(b.update_date).getTime() - new Date(a.update_date).getTime()
+        (a,b) => {
+            const a_date = a.update_date ? a.update_date : a.create_date;
+            const b_date = b.update_date ? b.update_date : b.create_date;
+            return (new Date(b_date)).getTime() - (new Date(a_date)).getTime();
+        }
     );
 }
 
