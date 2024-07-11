@@ -138,7 +138,7 @@ export const MdxComponent = {
 }
 ```
 
-- Phần hay nữa đó chính là mình hoàn toàn có thể dùng React Component (jsx hoặc tsx) trong MDX bằng cách thêm vào ở option `components` trong `MDXRemote` component. Các MDX mà mình sử dụng thì các bạn có thể thấy ở đoạn code trên. Ví dụ như mình dùng `<MdxYoutube />` để embed video, hay `<MdxMathBlock />` để tạo các block math như Definition, Theorem, ... như dưới đây.
+- Phần hay nữa đó chính là mình hoàn toàn có thể dùng React Component (jsx hoặc tsx) trong MDX bằng cách thêm vào ở option `components` trong `MDXRemote` component. Ví dụ như mình dùng `<MdxMathBlock />` để tạo các block math như Definition, Theorem, ... như dưới đây.
 
 ```tsx
 <MdxMathBlock type="theorem">
@@ -158,7 +158,7 @@ $$
 với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 </MdxMathBlock>
 
-- Cool ha, việc sử dụng được React Component nên mình cảm giác nhét gì vào cũng được 🤣 (nhưng đủ khả năng làm không, không). Hay mình có thể embed video youtube vào.
+- Cool ha, việc sử dụng được React Component nên mình cảm giác nhét gì vào cũng được 🤣 (nhưng đủ khả năng làm không, không). Hay mình có thể dùng `<MdxYoutube />` để embed video youtube vào.
 
 ```tsx
 <MdxYoutube

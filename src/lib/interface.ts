@@ -9,7 +9,7 @@ export interface IArticle {
     title: string,
     create_date: string,
     update_date?: string,
-    description: string,
+    description?: string,
     thumbnail?: string,
     draft?: boolean,
     tags: string[],
