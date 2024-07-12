@@ -1,4 +1,4 @@
-/* https://github.com/rehypejs/rehype-slug/blob/main/lib/index.js */
+/* ref: https://github.com/rehypejs/rehype-slug/blob/main/lib/index.js */
 
 /**
  * @typedef {import('hast').Root} Root
@@ -14,8 +14,8 @@
 import { slugify } from '../utils'
 import GithubSlugger from 'github-slugger'
 import { headingRank } from 'hast-util-heading-rank'
-import {toString} from 'hast-util-to-string'
-import {visit} from 'unist-util-visit'
+import { toString } from 'hast-util-to-string'
+import { visit } from 'unist-util-visit'
 
 
 /** @type {Options} */

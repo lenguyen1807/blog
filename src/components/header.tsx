@@ -33,7 +33,7 @@ export default function Header() {
                     <LinkLabel title="projects" href="/projects" />
                     <div className="hidden sm:block">
                         <span className="text-muted-foreground">{"/"}</span>
-                        <LinkLabel title="note" href="https://my-digital-garden-one-sigma.vercel.app/" />
+                        <LinkLabel title="note" href="https://le-nguyen-garden.vercel.app/" />
                         <span className="text-muted-foreground">{"/"}</span>
                         <LinkLabel title="resume" href="/resume.pdf" />
                     </div>
