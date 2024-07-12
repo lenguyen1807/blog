@@ -1,5 +1,5 @@
 import BlogContent from "@/components/blog/content";
-import { GetArticleByName } from "@/lib/api";
+import { GetAllArticles, GetArticleByName } from "@/lib/api";
 import { notFound } from 'next/navigation';
 import BlogHeader from "@/components/blog/header";
 import BlogFooter from "@/components/blog/footer";
@@ -8,6 +8,7 @@ import "@/styles/latex.css"
 import "@/styles/pretty-code.css"
 import Toc from "@/components/blog/toc";
 import { cn } from "@/lib/utils";
+import { slugify } from "@/lib/utils";
 
 type Props = {
     params: { slug: string };
@@ -16,6 +17,14 @@ type Props = {
 const lora = Lora({
     subsets: ["latin", "vietnamese"],
 });
+
+export async function generateStaticParams() {
+    const articles = await GetAllArticles();
+
+    return articles.map((article) => ({
+        slug: article.name
+    }))
+}
 
 export default async function Page({params} : Props) {
     const article = await GetArticleByName(params.slug);
