@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="border-t border-border pt-5">
                 <div className="flex flex-col items-center gap-y-3 sm:flex sm:flex-row sm:items-center sm:justify-between sm:gap-y-0">
                     <div className="flex text-sm gap-x-1">
-                        © 2024 made by {" "}
+                        © 2024 {" "}
                         <a href="https://github.com/lenguyen1807" className="hover:underline underline-offset-4">Le Nguyen</a>. All rights reserved.
                     </div>
                     <div className="flex items-center justify-between">

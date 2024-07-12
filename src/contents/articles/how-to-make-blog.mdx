@@ -1,7 +1,7 @@
 ---
 title: Mình làm Blog này như thế nào ?
 create_date: 07/07/2024
-update_date: 07/07/2024
+update_date: 07/11/2024
 tags: 
     - software
     - study 
@@ -12,8 +12,6 @@ thumbnail: "/contents/how-to-make-blog/thumbnail.jpg"
 ## Lý do mà mình làm Blog này
 
 Vào năm nhất mình có làm blog bằng [Jekyll](https://jekyllrb.com/) và sau đó thì mình chuyển qua dùng [Hugo](https://gohugo.io/). Nhưng mà nghĩ lại, mình cần có thứ gì đó của riêng mình, ngoài ra cũng nhờ việc mình phải động đến front-end ở môn Công nghệ phần mềm cho AI và cũng là lần đầu tiên mình động đến cái gọi là [React](https://react.dev/) và mỗi một thứ (kể là rất nhỏ) thì cũng có thể cần đến thư viện riêng (yes, I'm looking at you, Javascript developer). Thế nhưng đây vẫn là thiên thời địa lợi đối với mình, ngại gì không làm một blog cho riêng mình.
-
-## Ý tưởng
 
 Nói trắng ra thì blog mình đã dùng đến 80% thiết kế đến từ trang này rồi [^1] (rất là cảm ơn luôn 😭). Lúc đầu mình nghĩ sẽ thực hiện trên framework [Astro](https://astro.build/), thì cơ bản đây là một framework để dùng build blog rất mạnh (ngoài ra cái xịn nhất là page transition được build native) thế nhưng mình lại không biết dùng (thật ra là dùng không quen) 🥲 nên do đó mình quay lại dùng framework mà mình đã làm ở môn CNPM cho AI đó là [NextJS](https://nextjs.org/) và làm blog trên NextJS thì hơi chật vật tí.
 
@@ -140,9 +138,9 @@ export const MdxComponent = {
 }
 ```
 
-- Phần hay nữa đó chính là mình hoàn toàn có thể dùng React Component (jsx hoặc tsx) trong MDX bằng cách thêm vào ở option `components` trong `MDXRemote` component. Các MDX mà mình sử dụng thì các bạn có thể thấy ở đoạn code trên. Ví dụ như mình dùng `<MdxYoutube />` để embed video, hay `<MdxMathBlock />` để tạo các block math như Definition, Theorem, ... như dưới đây.
+- Phần hay nữa đó chính là mình hoàn toàn có thể dùng React Component (jsx hoặc tsx) trong MDX bằng cách thêm vào ở option `components` trong `MDXRemote` component. Ví dụ như mình dùng `<MdxMathBlock />` để tạo các block math như Definition, Theorem, ... như dưới đây.
 
-```mdx
+```tsx
 <MdxMathBlock type="theorem">
 Bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông. Hay,
 $$
@@ -160,20 +158,20 @@ $$
 với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 </MdxMathBlock>
 
-- Cool ha, việc sử dụng được React Component nên mình cảm giác nhét gì vào cũng được 🤣 (nhưng đủ khả năng làm không, không). Hay mình có thể embed video youtube vào.
+- Cool ha, việc sử dụng được React Component nên mình cảm giác nhét gì vào cũng được 🤣 (nhưng đủ khả năng làm không, không). Hay mình có thể dùng `<MdxYoutube />` để embed video youtube vào.
 
-```mdx
+```tsx
 <MdxYoutube
-  src="VR9wmlmD2SA"
-  title="Gotta Lock In"
-  caption="Gotta Lock In"
+  src="abPmZCZZrFA"
+  title="Đừng làm trái tim anh đau"
+  caption="Đừng làm trái tim anh đau"
 />
 ```
 
 <MdxYoutube
-  src="VR9wmlmD2SA"
-  title="Gotta Lock In"
-  caption="Gotta Lock In"
+  src="abPmZCZZrFA"
+  title="Đừng làm trái tim anh đau"
+  caption="Đừng làm trái tim anh đau"
 />
 
 ### Implement một số cái bên lề
@@ -182,7 +180,7 @@ với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 
 ### Các chức năng cần thêm
 
-- [ ] Add Google Analytics and Search Console.
+- [x] Add Google Analytics and Search Console.
 - [ ] Add SEO.
 - [x] Better Table of Contents (maybe nằm ở bên phải or trái).
 - [ ] Post Search.
@@ -192,5 +190,6 @@ với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 - [ ] Post Comment.
 - [ ] Dùng database.
 - [ ] Improve MDX Loading Time (chắc phải đổi thư viện hoặc skill issues 😞).
+- [ ] Sitemap.
 
 [^1]: https://astro-theme-resume.vercel.app/
