@@ -22,7 +22,7 @@ export async function generateStaticParams() {
     const articles = await GetAllArticles();
 
     return articles.map((article) => ({
-        slug: slugify(article.name)
+        slug: article.name
     }))
 }
 
