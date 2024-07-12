@@ -35,8 +35,8 @@ export default async function Page({params} : Props) {
     return (
         <div className={cn(lora.className)}>
             <BlogHeader article={article} />
-            <div className="mt-8 gap-x-20 lg:flex lg:items-start">
-                <aside className="xl:sticky top-20 order-2 -me-48 hidden basis-60 lg:flex lg:flex-col">
+            <div className="pt-14 gap-x-20 lg:flex lg:items-start">
+                <aside className="xl:sticky top-20 order-2 pb-16 -me-48 basis-60 lg:flex lg:flex-col">
                     <Toc tocs={article.toc} />
                 </aside>
                 <BlogContent content={article.body} />
