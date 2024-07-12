@@ -8,7 +8,6 @@ import "@/styles/latex.css"
 import "@/styles/pretty-code.css"
 import Toc from "@/components/blog/toc";
 import { cn } from "@/lib/utils";
-import { slugify } from "@/lib/utils";
 
 type Props = {
     params: { slug: string };
@@ -35,14 +34,14 @@ export default async function Page({params} : Props) {
 
     return (
         <div className={cn(lora.className)}>
-            <div className="mt-8 gap-x-10 items-center justify-center">
-                <BlogHeader article={article} />
-                <aside className="xl:sticky top-20 order-2 -me-28 basis-60 xl:mr-[-13vw] xl:float-right xl:clear-right pb-6">
+            <BlogHeader article={article} />
+            <div className="mt-8 gap-x-20 lg:flex lg:items-start">
+                <aside className="xl:sticky top-20 order-2 -me-48 hidden basis-60 lg:flex lg:flex-col">
                     <Toc tocs={article.toc} />
                 </aside>
                 <BlogContent content={article.body} />
-                <BlogFooter />
             </div>
+            <BlogFooter />
         </div>
     )
 }

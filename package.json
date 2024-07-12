@@ -45,6 +45,7 @@
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "unist-util-visit": "^5.0.0",
+    "usehooks-ts": "^3.1.0",
     "windups": "^1.2.2"
   },
   "devDependencies": {
