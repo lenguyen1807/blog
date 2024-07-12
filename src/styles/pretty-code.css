@@ -1,16 +1,16 @@
 /* for rehype-pretty */
 pre {
-  @apply rounded-lg;
+  @apply !px-0 !py-0 border-border border-2 border-dashed rounded-lg;
   display: grid;
-  padding: 1.5 rem 0;
 }
 
 code {
-  @apply text-sm md:text-base !leading-loose;
+  @apply !text-sm md:!text-base !leading-loose;
 }
 
 pre > code {
   counter-reset: line;
+  @apply !px-4 !py-3;
 }
 
 code[data-line-numbers] {
@@ -54,7 +54,7 @@ code[data-line-numbers] > [data-line]::before {
 }
 
 [data-rehype-pretty-code-title] {
-  @apply bg-zinc-700 text-zinc-200 rounded-t-lg py-2 px-3 font-semibold text-sm;
+  @apply bg-primary-foreground border-dashed rounded-t-lg border-t-2 border-x-2 border-border py-2 px-3 font-semibold text-sm text-primary w-fit;
 }
 
 figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
@@ -69,4 +69,18 @@ pre,
 code,
 figure {
   @apply overflow-x-auto;
+}
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
 }

@@ -49,7 +49,7 @@ thumbnail: "/contents/how-to-make-blog/thumbnail.jpg"
 
 - Đầu tiên mình phải đọc và parse được file mdx ấy, để tách nó ra thành string, sau đó mới đưa cho `next-mdx-remote` xử lý string ấy. Mình dùng thư viện [globby](https://www.npmjs.com/package/globby) để đọc file (ngoài ra cái quan trọng là nó đọc được cả trong subdirectory). Sau khi đọc mình sẽ lấy tên file, lấy content và metadata của file (hay còn gọi là front-matter) bằng thư viện [gray-matter](https://www.npmjs.com/package/gray-matter).
 
-```ts showLineNumbers
+```ts showLineNumbers title="/lib/api.ts"
 /* read all files have .mdx extension */
 const articles = await globby(ArticlePath("**/*.mdx"));
 
@@ -189,7 +189,8 @@ với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 - [ ] View Counter (kiểu xem có bao nhiêu người xem post mình rồi, maybe I don't need it because it's always 0).
 - [ ] Post Comment.
 - [ ] Dùng database.
-- [ ] Improve MDX Loading Time (chắc phải đổi thư viện hoặc skill issues 😞).
+- [x] Improve MDX Loading Time (mình không biết có thể gọi là improve không, mình dùng `getStaticParams` trong NextJS để build các post này thành HTML ở build time luôn, gọi là Static Site Generation [^2]).
 - [ ] Sitemap.
 
 [^1]: https://astro-theme-resume.vercel.app/
+[^2]: https://developer.mozilla.org/en-US/blog/static-site-generation-with-nextjs/
