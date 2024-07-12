@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss"
-import type { PluginAPI } from "tailwindcss/types/config";
 
 const { fontFamily } = require("tailwindcss/defaultTheme")
 

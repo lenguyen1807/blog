@@ -5,7 +5,7 @@ pre {
 }
 
 code {
-  @apply !text-sm md:!text-base !leading-loose;
+  @apply !text-sm lg:!text-base !leading-loose;
 }
 
 pre > code {
@@ -81,6 +81,7 @@ code[data-theme*=" "] span {
   code[data-theme*=" "],
   code[data-theme*=" "] span {
     color: var(--shiki-dark);
-    background-color: var(--shiki-dark-bg);
+    /* background-color: var(--shiki-dark-bg); */
+    background-color: var(--background);
   }
 }
