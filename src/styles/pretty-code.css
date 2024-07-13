@@ -81,7 +81,7 @@ code[data-theme*=" "] span {
   code[data-theme*=" "],
   code[data-theme*=" "] span {
     color: var(--shiki-dark);
-    /* background-color: var(--shiki-dark-bg); */
-    background-color: var(--background);
+    background-color: var(--shiki-dark-bg);
+    /* background-color: var(--background); */
   }
 }

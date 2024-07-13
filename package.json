@@ -11,8 +11,8 @@
     "analyze": "ANALYZE=true bun run build"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^14.2.4",
-    "@next/third-parties": "^14.2.4",
+    "@next/bundle-analyzer": "^14.2.5",
+    "@next/third-parties": "^14.2.5",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-context-menu": "^2.2.1",
@@ -21,14 +21,14 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.2.13",
+    "framer-motion": "^11.3.2",
     "github-slugger": "^2.0.0",
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "hast-util-heading-rank": "^3.0.0",
     "lucide-react": "^0.399.0",
     "mdast-util-to-string": "^4.0.0",
-    "next": "14.2.4",
+    "next": "^14.2.5",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
@@ -45,8 +45,7 @@
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "unist-util-visit": "^5.0.0",
-    "usehooks-ts": "^3.1.0",
-    "windups": "^1.2.2"
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
@@ -54,7 +53,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.4",
+    "eslint-config-next": "^14.2.5",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.3"

@@ -18,8 +18,8 @@ interface BlogContentProps {
 const options: Options = {
     keepBackground: true,
     theme: {
-        dark: "one-dark-pro",
-        light: "one-light"
+        dark: "dark-plus",
+        light: "light-plus"
     },
     defaultLang: {
         block: "plaintext",

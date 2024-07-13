@@ -20,11 +20,11 @@ Nói trắng ra thì blog mình đã dùng đến 80% thiết kế đến từ t
 Mình sẽ giả sử là các bạn đã biết cơ bản về NextJS rồi nhé, ví dụ như [App Router](https://nextjs.org/docs/app) (nói chung là NextJS mạnh và dễ dùng, dùng sai thì shoot yourself on the foot thôi 😈, với lại do mình chỉ biết duy nhất framework này nên chắc chắn bias nó rồi).
 
 Trước tiên là nói về những gì mình dùng:
-- NextJS: yeah sure chắc chắn là như vậy rồi. Và để update mới nhất, mình dùng NextJS 14.2 và App Router.
+- NextJS: yeah sure chắc chắn là như vậy rồi. Và để update mới nhất, mình dùng NextJS 14.2.
 - [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote): đây là một thư viện dùng để xử lý các file [MDX](https://mdxjs.com/) (nó là markdown nhưng các bạn có thể thêm react component vào ấy).
 - Mình không dùng database nào để lưu post và lưu thẳng nó cùng với code, điều này có điểm tốt là dễ làm và điểm không tốt là không scale được, mình nghĩ khi nào số lượng post của mình nhiều, maybe 100 cái 🤷‍♂️ thì mình sẽ chuyển sang dùng database (à ngoài ra tại mình không biết làm).
 - Như các bạn thấy tên miền có phần `vercel.app` thì mình deploy cái blog này trên [Vercel](https://vercel.com), cái này dễ dùng, mình ấn 1-2 click là xong.
-- Còn về UI, thì mình sử dụng [TailwindCSS](https://tailwindcss.com/) (chủ yếu là chép từ [^1] thôi) và không thể thiếu là vị ân nhân của mình, thư viện [shadcn/ui](https://ui.shadcn.com/) (các button, link, animation gì đó đều được mình lấy từ thư viện này hết).
+- Còn về UI, thì mình sử dụng [TailwindCSS](https://tailwindcss.com/) (chủ yếu là chép từ [^1] thôi) và không thể thiếu là thư viện [shadcn/ui](https://ui.shadcn.com/) (các button, link, animation gì đó đều được mình lấy từ thư viện này hết).
 - Ngoài ra còn rất nhiều cái lặt vặt khác, mình sẽ nói ở phần sau nhé.
 
 ### Xử lý file MDX như thế nào ?
@@ -189,8 +189,9 @@ với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 - [ ] View Counter (kiểu xem có bao nhiêu người xem post mình rồi, maybe I don't need it because it's always 0).
 - [ ] Post Comment.
 - [ ] Dùng database.
-- [x] Improve MDX Loading Time (mình không biết có thể gọi là improve không, mình dùng `getStaticParams` trong NextJS để build các post này thành HTML ở build time luôn, gọi là Static Site Generation [^2]).
+- [x] Improve MDX Loading Time (mình không biết có thể gọi là improve không, mình dùng `generateStaticParams` [^2] trong NextJS để build các post này thành HTML ở build time luôn, gọi là Static Site Generation [^3]).
 - [ ] Sitemap.
 
 [^1]: https://astro-theme-resume.vercel.app/
-[^2]: https://developer.mozilla.org/en-US/blog/static-site-generation-with-nextjs/
+[^2]: https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+[^3]: https://developer.mozilla.org/en-US/blog/static-site-generation-with-nextjs/
