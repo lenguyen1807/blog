@@ -1,0 +1,291 @@
+---
+title: Neural Network đơn giản với C++ (Phần 1)
+create_date: 07/15/2024
+update_date: 07/15/2024
+tags:
+    - deep learning
+    - study
+draft: true
+---
+
+## Neural Network là gì ?
+
+<MdxImage
+src="https://images.prismic.io/turing/659d7aad531ac2845a274355_Deep_neural_network_25a8b6fa7f.webp?auto=format,compress"
+alt="Neural Network Architecture"
+height="300"
+width="600"
+caption="Kiến trúc của một Neural Network (nguồn: Understanding Feed Forward Neural Networks With Maths and Statistics - turing.com)"
+/>
+
+Dựa vào ảnh trên, có thể thấy một Neural Network như là một đồ thị có hướng không chu trình. Trong đó sẽ gồm nhiều nút, mỗi nút được sắp xếp theo từng **layer**, những layer mà không phải input hoặc output thì được gọi là **hidden layer**. Mỗi cạnh của Neural Network sẽ có trọng số hay **weight**.
+
+> Lưu ý là khi ta nói Neural Network có 1 layer, ta sẽ hiểu Neural Network ấy sẽ bao gồm 1 layer input và 1 layer output. Bởi vì khi nói đến layer, ta chỉ nói đến các layer có thể tính toán được, còn input layer chỉ có nhiệm vụ nhận giá trị chứ không tính toán giá trị ấy <MdxCite bibKey="aggarwalIntroductionNeuralNetworks2023"/>.
+
+## Tất cả chỉ là nhân ma trận
+
+## Những dòng code đầu tiên: Ma trận
+
+Đầu tiên ta phải có 1 class ma trận. Ở đây mình chọn `std::vector` ví nó đơn giản, dễ sử dụng cực kì. Còn tại sao lại dùng `size_t` mà không dùng `int`, bởi vì nếu bạn gọi `length()` của vector thì giá trị trả về là `size_t` chứ không phải `int`, nên nếu dùng `int` tức là bạn đang ép kiểu từ `size_t` về `int`.
+
+> Kiểu `size_t` là một kiểu dữ liệu số nguyên không dấu và điều đặc biệt là `size_t` không có kích thước cố định, trong khi `int` thì sẽ từ 2 cho đến 4 bytes [^1].
+
+Việc dùng `const Matrix& mat` thay vì `Matrix mat` sẽ làm được 2 thứ khi các bạn truyền vào tham số, thứ nhất là `&` sẽ chỉ định compiler rằng ta sẽ truyền tham chiếu (hay pass by reference) nếu không có dấu `&` thì compiler sẽ tạo một copy của `mat` dẫn đến không tối ưu, tiếp theo là `const`, bởi vì khi dùng `&` ta có thể thay đổi được giá trị của `mat` trong hàm nên dùng `const` để tránh điều này xảy ra.
+
+```cpp title="matrix.h"
+class Matrix 
+{
+public:
+    size_t rows;
+    size_t cols;
+    std::vector<std::vector<double>> values;
+
+    // Tạo một ma trận với 
+    // số dòng = rows
+    // số cột = cols
+    Matrix(size_t rows, size_t cols);
+
+    // Tạo một ma trận = ma trận mat (truyền vào)
+    Matrix(const Matrix& mat);
+
+    // Fill tất cả phần tử của ma trận với 1 giá trị nhiều nhất
+    // Điều này giúp dễ dàng tạo ma trận 0
+    // Fill(0)
+    void Fill(double value);
+
+    // In ma trận
+    void Print();
+
+    // Xem hai ma trận có bằng nhau không
+    Matrix& operator=(const Matrix& mat);
+
+    // Cộng bằng ma trận
+    Matrix& operator+=(const Matrix& mat);
+    // Trừ bằng ma trận
+    Matrix& operator-=(const Matrix& mat);
+    // Chuyển vị ma trận
+    Matrix T();
+}
+
+// Cộng ma trận
+inline Matrix operator+(Matrix mat1, const Matrix& mat2) 
+{
+    mat1 += mat2;
+    return mat1;
+}
+
+// Trừ ma trận
+inline Matrix operator-(Matrix mat1, const Matrix& mat2) 
+{
+    mat1 -= mat2;
+    return mat1;
+}
+
+// Nhân ma trận
+inline Matrix operator*(const Matrix& mat1, const Matrix& mat2) 
+{
+    // Implement nhân ma trận ở đây ...
+}
+```
+
+Tại sao mình lai dùng `inline` rồi code thêm operator `+=` chi cho phức tạp vậy, chỉ cần code `Matrix operator+(const Matrix& mat1, const Matrix& mat2)` là đủ rồi. Việc mình implement `+=` trước sau đó dùng lại `+=` ở `+` thì sẽ tiết kiệm được việc phải implement 2 cái, ngoài ra dùng `inline` sẽ tối ưu hơn. Tiếp theo việc truyền `Matrix mat1` thay vì `const Matrix& mat1` sẽ copy luôn `mat1` và dùng `+=` sẽ thay đổi `mat1` trực tiếp, cuối cùng là return về copy của `mat1` và ta xem nó như là kết quả của `mat1 + mat2` [^2].
+
+Để đơn giản hoá, khi nhân ma trận mình chỉ cần chạy từng dòng, đến từng cột, sau đó tích vô hướng lại, cái này thì dễ làm nhưng độ phức tạp sẽ rơi vào $O(n^3)$, rất là lớn ha, nếu các bạn muốn nhanh hơn thì có thể dùng các thuật toán khác (nhưng mà như này cũng đủ nhanh rồi).
+
+```cpp title="matrix.h"
+inline Matrix operator*(const Matrix& mat1, const Matrix& mat2)
+{
+    assert(mat1.cols == mat2.rows);
+    
+    Matrix res(mat1.rows, mat2.cols);
+
+    for (size_t i = 0; i < mat1.rows; i++)
+    {
+        for (size_t j = 0; j < mat2.cols; j++)
+        {
+            for (size_t k = 0; k < mat1.cols; k++)
+            {
+                res.values[i][j] += mat1.values[i][k]*mat2.values[k][j];
+            }
+        }
+    }
+
+    return res;
+}
+```
+
+Cuối cùng sẽ là implement các hàm còn lại của class `Matrix`. Đối với 2 constructor, ở constructor với tham số `row, cols`, do `std::vector` là vector lồng vector nên khi khởi tạo, hãy khởi tạo vector phía bên trong [^3], nếu không nó sẽ dễ bị bug đấy.
+
+> Cái mà `: rows(rows), cols(cols), ...` ấy được gọi là initializer list [^4]. Đây chỉ là một cách để khởi tạo biến cho class trong C++, cách khác có thể là `this.rows = rows`, ...
+
+```cpp title="matrix.cpp"
+Matrix::Matrix(size_t rows, size_t cols)
+: rows(rows)
+, cols(cols)
+, values(rows, std::vector<double>(cols))
+{}
+
+Matrix::Matrix(const Matrix& mat)
+: rows(mat.rows)
+, cols(mat.cols)
+, values(rows, std::vector<double>(cols))
+{
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            values[i][j] = mat.values[i][j];
+        }
+    }
+}
+```
+
+Đối với ma trận chuyển vị, thì ta cũng dùng thuật toán đơn giản theo công thức sau:
+$$
+(A^T)[j][i] = A[i][j]
+$$
+
+```cpp title="matrix.cpp"
+Matrix Matrix::T()
+{
+    Matrix mat(cols, rows);
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            mat.values[j][i] = this->values[j][i];
+        }
+    }
+    return mat;
+}
+```
+
+Ngoài ra còn operator `+=, -=, =` mà chúng ta cũng phải implement, mình nghĩ code nó khá dễ rồi nên sẽ không giải thích nhiều. Trước khi cộng, trừ hay so sánh hai ma trận, ta phải so sánh hai ma trận xem có cùng chiều với nhau không thông qua một hàm phụ là `CheckDimension`.
+
+```cpp title="matrix.cpp"
+void Matrix::CheckDimension(const Matrix& mat1, const Matrix& mat2)
+{
+    assert(mat1.rows == mat2.rows && mat2.cols == mat2.cols);
+}
+
+Matrix& Matrix::operator=(const Matrix& mat)
+{
+    this->cols = mat.cols;
+    this->rows = mat.rows;
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            values[i][j] = mat.values[i][j];
+        }
+    }
+    return *this;
+}
+
+Matrix& Matrix::operator-=(const Matrix& mat)
+{
+    CheckDimension((*this), mat);
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            this->values[i][j] -= mat.values[i][j];
+        }
+    }
+    return *this;
+}
+
+Matrix& Matrix::operator+=(const Matrix& mat)
+{
+    CheckDimension((*this), mat);
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            this->values[i][j] += mat.values[i][j];
+        }
+    }
+    return *this;
+}
+```
+
+Như vậy là gần xong class ma trận rồi, thế nhưng ta vẫn cần một số hàm phụ trợ nữa. Đầu tiên chính là `Flatten`, tức là ta sẽ đưa ma trận 2 chiều về thành vector 1 chiều, cái này cực quan trọng nếu dữ liệu là ảnh, ảnh thông thường sẽ ở dạng 2 chiều, nhưng mà input của Neural Network lại là 1 chiều. Mình implement hàm `Flatten` như sau: 
+
+```cpp title="matrix.h"
+class Matrix
+{
+    // ...
+    static Matrix Flatten(const Matrix& mat);
+    // ...
+}
+```
+
+Việc mình chọn `static` là bởi vì mình không muốn hàm `Flatten` phải có object mới dùng được, kiểu như ta có một object `Matrix mat` bất kì thì cứ gọi `Matrix::Flatten(mat)` là được.
+
+```cpp title="matrix.cpp"
+Matrix Matrix::Flatten(const Matrix& mat)
+{
+    // Ở đây vector n chiều được xem như là một ma trận 
+    // với 1 cột và n dòng (vector cột)
+    Matrix res(mat.cols * mat.rows, 1);
+    for (size_t i = 0; i < mat.rows; i++)
+    {
+        for (size_t j = 0; j < mat.cols; j++)
+        {
+            res.values[i*mat.rows + j][0] = mat.values[i][j];
+        }
+    }
+    return res;
+}
+```
+
+Cuối cùng là mình phải tìm cách để khởi tạo weight cho Neural Network một cách tối ưu nhất, theo [^5] thì khởi tạo trọng số như sau: Với mỗi trọng số $w$, ta lấy $w$ từ một phân phối chuẩn có trung bình là $0$ và phương sai là $\sqrt{\left( 2/n \right)}$ với $n$ là số chiều của vector input (hay đúng hơn là chiều của layer phía trước).
+
+```cpp title="matrix.h"
+class Matrix
+{
+    // ...
+    static Matrix Randomized(size_t rows, size_t cols);
+    // ...
+}
+```
+
+```cpp title="matrix.cpp"
+#include <random>
+
+// ...
+
+Matrix Matrix::Randomized(size_t rows, size_t cols)
+{
+    // generate random in uniform distribution
+    std::random_device rand_dev;
+    std::mt19937 generator(rand_dev());
+
+    // https://cs231n.github.io/neural-networks-2/#init
+    double var = 2.0f / sqrt(static_cast<double>(cols)); 
+    std::uniform_real_distribution<double> distr(0, var);
+
+    Matrix res(rows, cols);
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            res.values[i][j] = distr(generator);
+        }
+    }
+
+    return res;
+}
+```
+
+Vậy là xong class Ma trận rồi ấy, cảm ơn các bạn đã đọc đến đây hehe 🍉. Bây giờ cùng qua phần sau [Neural Network đơn giản với C++ (Phần 2)](/blog/cpp-nn-2) thôi.
+
+<MdxBib
+source="cpp-nn.bib"
+/>
+
+[^1]: https://stackoverflow.com/questions/131803/unsigned-int-vs-size-t
+[^2]: https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading
+[^3]: https://stackoverflow.com/questions/13121469/initializing-a-vector-of-vectors-having-a-fixed-size-with-boost-assign
+[^4]: https://en.cppreference.com/w/cpp/language/constructor
+[^5]: https://cs231n.github.io/neural-networks-2/#init

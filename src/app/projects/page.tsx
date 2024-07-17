@@ -8,7 +8,7 @@ export default function Page() {
             subheading="Project for CSC10011 - Software Engineering for AI Course"
             date="2024"
             imgPath="/homepage/bobo-homepage.png"
-            href="https://github.com/lenguyen1807/Software-for-AI"
+            href="/projects/bobo-library"
             >
             <ul className="list-disc text-muted-foreground ml-6">
                 <li>Team size: 6.</li>
@@ -21,11 +21,11 @@ export default function Page() {
             </ul>
             </ProjectCard>
             <ProjectCard 
-            heading="Road Image Segmentation"
-            subheading="Project for CSC16004 - Computer Vision Course. Using Pytorch."
-            date="2024"
-            imgPath="/homepage/attentionUnet.png"
-            href="https://github.com/lenguyen1807/HCMUS-CSC16004-Computer-Vision/tree/main/Project"
+                heading="Road Image Segmentation"
+                subheading="Project for CSC16004 - Computer Vision Course. Using Pytorch."
+                date="2024"
+                imgPath="/homepage/attentionUnet.png"
+                href="https://github.com/lenguyen1807/HCMUS-CSC16004-Computer-Vision/tree/main/Project"
             />
         </div>
     )

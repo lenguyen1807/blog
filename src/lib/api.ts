@@ -6,17 +6,9 @@ import { remark } from "remark";
 import { headingTree } from "@/lib/other/tree";
 import path from "path";
 
-function ArticlePath(mdxpath: string) { 
-    const articlePath = "src/contents"
-    if (process.env.NODE_ENV === "production") {
-        return `${path.resolve(process.cwd(), articlePath)}/${mdxpath}`;
-    }
-    return `${articlePath}/${mdxpath}`;
-}
-
-export async function GetAllArticles() {
+export async function GetAllMdx(path: string) {
     /* read all files have .mdx extension */
-    const articles = await globby(ArticlePath("**/*.mdx"));
+    const articles = await globby(path);
 
     return Promise.all(
         articles.map(async (file) => {
@@ -34,6 +26,39 @@ export async function GetAllArticles() {
             return {...data, body: content, name: fileName, toc: toc} as IArticle;
         })
     )
+}
+
+/* Projects */
+
+function ProjectsPath(mdxpath: string) { 
+    const articlePath = "src/contents/projects/"
+    if (process.env.NODE_ENV === "production") {
+        return `${path.resolve(process.cwd(), articlePath)}/${mdxpath}`;
+    }
+    return `${articlePath}/${mdxpath}`;
+}
+
+export async function GetAllProjects() {
+    return GetAllMdx(ProjectsPath("**/*.mdx"));
+}
+
+export async function GetProjectByName(name: string) {
+    const projects = await GetAllProjects();
+    return projects.find((project) => project.name === name)
+}
+
+/* Articles */
+
+function ArticlePath(mdxpath: string) { 
+    const articlePath = "src/contents/articles/"
+    if (process.env.NODE_ENV === "production") {
+        return `${path.resolve(process.cwd(), articlePath)}/${mdxpath}`;
+    }
+    return `${articlePath}/${mdxpath}`;
+}
+
+export async function GetAllArticles() {
+    return GetAllMdx(ArticlePath("**/*.mdx"));
 }
 
 export function GetAllArticlesSort(articles: IArticle[]) {
