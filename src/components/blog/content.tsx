@@ -30,7 +30,9 @@ const options: Options = {
 
 export default async function BlogContent({content, className} : BlogContentProps) {
     return (
-        <article className={cn("flex-grow break-words prose prose-rose dark:prose-invert lg:prose-lg", className)}>
+        <article 
+            className={cn("flex-grow break-words prose dark:prose-invert lg:prose-lg", className)}
+        >
             <MDXRemote 
                 source={content}
                 components={{ ...MdxComponent }}

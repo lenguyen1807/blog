@@ -35,11 +35,14 @@ export default async function Page({params} : Props) {
     return (
         <div className={cn(lora.className)}>
             <BlogHeader article={article} />
-            <div className="pt-14 gap-x-20 lg:flex lg:items-start">
-                <aside className="xl:sticky top-20 order-2 pb-16 -me-48 basis-60 lg:flex lg:flex-col">
+            <div className="pt-14 xl:gap-x-20 xl:flex xl:items-start">
+                <aside className="xl:sticky xl:top-20 xl:order-2 pb-16 xl:-me-52 xl:basis-60">
                     <Toc tocs={article.toc} />
                 </aside>
-                <BlogContent content={article.body} />
+                <BlogContent 
+                    content={article.body} 
+                    className="max-w-none prose-a:no-underline hover:prose-a:underline prose-rose" 
+                />
             </div>
             <BlogFooter />
         </div>
