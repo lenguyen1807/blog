@@ -29,8 +29,8 @@ export default function MdxImage({
         alt={alt}
         height={height}
         width={width}
-        quality={100}
-        loading='lazy'
+        sizes="100vw"
+        loading="lazy"
         {...rest}
       />
       {caption && (

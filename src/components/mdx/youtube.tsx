@@ -1,20 +1,14 @@
 // ref: https://github.com/letelete/letelete.github.io/blob/master/src/components/ui/atoms/mdx/mdx-youtube-embed.tsx
 
 import { cn } from "@/lib/utils";
-
-export interface MdxYoutubeProps {
-  src: string;
-  title: string;
-  className?: string;
-  caption?: string;
-}
+import { MdxVideoProps } from "./video";
 
 export default function MdxYoutube({
   src,
   title,
   className,
   caption
-} : MdxYoutubeProps) {
+} : MdxVideoProps) {
   return (
     <figure
       className={cn(
