@@ -14,7 +14,7 @@ export default function MdxCite({bibKey} : MdxCiteProps) {
         if (value != null) {
             setElement(value);
         }
-    }, [])
+    }, [bibKey])
 
     if (element === null) {
         return null;
