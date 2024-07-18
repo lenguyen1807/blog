@@ -32,12 +32,6 @@ export default function Home() {
           height="86px"
         />
       </TextSection>
-      <TextSection title="Certification">
-        <ResumeCard 
-          heading="Coursera: Deep Learning Specialization"
-          date="Sep 2024"
-        />
-      </TextSection>
     </div>
   );
 }
