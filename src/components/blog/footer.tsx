@@ -7,7 +7,7 @@ import { ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function BlogFooter() {
-    const isDesktop = useMediaQuery("(min-width: 768px)");
+    const isDesktop = useMediaQuery("(min-width: 1024px)");
     
     if (isDesktop) {
         return (

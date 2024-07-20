@@ -24,11 +24,13 @@ export default function MdxImage({
       )}
     >
       <ImagePrimitive
-        className="transition rounded-md"
+        className={cn("transition rounded-md h-auto", {
+          "w-max h-auto": height === undefined && width === undefined
+        })}
         src={src}
         alt={alt}
-        height={height}
-        width={width}
+        height={height ? height : 0}
+        width={width ? width : 0}
         sizes="100vw"
         loading="lazy"
         {...rest}

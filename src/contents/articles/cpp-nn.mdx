@@ -6,6 +6,7 @@ tags:
     - deep learning
     - study
 draft: true
+thumbnail: https://i.redd.it/zjxo20plpms81.jpg
 ---
 
 ## Neural Network là gì ?
@@ -13,16 +14,12 @@ draft: true
 <MdxImage
 src="https://images.prismic.io/turing/659d7aad531ac2845a274355_Deep_neural_network_25a8b6fa7f.webp?auto=format,compress"
 alt="Neural Network Architecture"
-height="300"
-width="600"
 caption="Kiến trúc của một Neural Network (nguồn: Understanding Feed Forward Neural Networks With Maths and Statistics - turing.com)"
 />
 
 Dựa vào ảnh trên, có thể thấy một Neural Network như là một đồ thị có hướng không chu trình. Trong đó sẽ gồm nhiều nút, mỗi nút được sắp xếp theo từng **layer**, những layer mà không phải input hoặc output thì được gọi là **hidden layer**. Mỗi cạnh của Neural Network sẽ có trọng số hay **weight**.
 
 > Lưu ý là khi ta nói Neural Network có 1 layer, ta sẽ hiểu Neural Network ấy sẽ bao gồm 1 layer input và 1 layer output. Bởi vì khi nói đến layer, ta chỉ nói đến các layer có thể tính toán được, còn input layer chỉ có nhiệm vụ nhận giá trị chứ không tính toán giá trị ấy <MdxCite bibKey="aggarwalIntroductionNeuralNetworks2023"/>.
-
-## Tất cả chỉ là nhân ma trận
 
 ## Những dòng code đầu tiên: Ma trận
 
@@ -88,7 +85,7 @@ inline Matrix operator*(const Matrix& mat1, const Matrix& mat2)
 }
 ```
 
-Tại sao mình lai dùng `inline` rồi code thêm operator `+=` chi cho phức tạp vậy, chỉ cần code `Matrix operator+(const Matrix& mat1, const Matrix& mat2)` là đủ rồi. Việc mình implement `+=` trước sau đó dùng lại `+=` ở `+` thì sẽ tiết kiệm được việc phải implement 2 cái, ngoài ra dùng `inline` sẽ tối ưu hơn. Tiếp theo việc truyền `Matrix mat1` thay vì `const Matrix& mat1` sẽ copy luôn `mat1` và dùng `+=` sẽ thay đổi `mat1` trực tiếp, cuối cùng là return về copy của `mat1` và ta xem nó như là kết quả của `mat1 + mat2` [^2].
+Tại sao mình lại dùng `inline` rồi code thêm operator `+=` chi cho phức tạp vậy, chỉ cần code `Matrix operator+(const Matrix& mat1, const Matrix& mat2)` là đủ rồi. Việc mình implement `+=` trước sau đó dùng lại `+=` ở `+` thì sẽ tiết kiệm được việc phải implement 2 cái, ngoài ra dùng `inline` sẽ tối ưu hơn. Tiếp theo việc truyền `Matrix mat1` thay vì `const Matrix& mat1` sẽ copy luôn `mat1` và dùng `+=` sẽ thay đổi `mat1` trực tiếp, cuối cùng là return về copy của `mat1` và ta xem nó như là kết quả của `mat1 + mat2` [^2].
 
 Để đơn giản hoá, khi nhân ma trận mình chỉ cần chạy từng dòng, đến từng cột, sau đó tích vô hướng lại, cái này thì dễ làm nhưng độ phức tạp sẽ rơi vào $O(n^3)$, rất là lớn ha, nếu các bạn muốn nhanh hơn thì có thể dùng các thuật toán khác (nhưng mà như này cũng đủ nhanh rồi).
 
@@ -114,9 +111,9 @@ inline Matrix operator*(const Matrix& mat1, const Matrix& mat2)
 }
 ```
 
-Cuối cùng sẽ là implement các hàm còn lại của class `Matrix`. Đối với 2 constructor, ở constructor với tham số `row, cols`, do `std::vector` là vector lồng vector nên khi khởi tạo, hãy khởi tạo vector phía bên trong [^3], nếu không nó sẽ dễ bị bug đấy.
+Cuối cùng sẽ là implement các hàm còn lại của class hàm ma trận. Lưu ý khi khởi tạo vector lồng vector nhớ khởi tạo vector phía bên trong [^3], nếu không nó sẽ dễ bị bug đấy.
 
-> Cái mà `: rows(rows), cols(cols), ...` ấy được gọi là initializer list [^4]. Đây chỉ là một cách để khởi tạo biến cho class trong C++, cách khác có thể là `this.rows = rows`, ...
+> Cái mà `:rows(rows),cols(cols)` ấy được gọi là initializer list [^4]. Đây là một cách để khởi tạo biến cho class trong C++.
 
 ```cpp title="matrix.cpp"
 Matrix::Matrix(size_t rows, size_t cols)

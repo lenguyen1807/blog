@@ -34,9 +34,9 @@ export default function Layout({
 }>) {
     return (
         <div className="grid gap-y-8">
-            <span className="border-l-2 pl-6 text-base">
+            {/* <span className="border-l-2 pl-6 text-base">
                 <strong>Note:</strong> If you see a page loading for too long, just press back button and click to it again or reload it. I'm sorry but I can't fix it 😞.
-            </span>
+            </span> */}
             <div className="w-full">
                 <Button variant="outline" className="h-8 w-20">
                     <Link href="/blog" className="flex">
@@ -44,13 +44,7 @@ export default function Layout({
                         Back
                     </Link>
                 </Button>
-                <Suspense fallback={
-                    <div className='flex h-full w-full items-center justify-center'>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    </div>
-                }>
-                    {children}
-                </Suspense>
+                {children}
             </div>
         </div>
     )
