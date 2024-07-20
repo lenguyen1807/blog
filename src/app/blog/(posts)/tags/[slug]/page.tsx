@@ -7,12 +7,13 @@ type Props = {
 };
 
 export default async function Page({params} : Props) {
-    const articles = await GetArticleByTag(params.slug);
+    const tag = decodeURIComponent(params.slug);
+    const articles = await GetArticleByTag(tag);
 
     return (
         <div className="space-y-12">
             <h1 className="text-xl lg:text-2xl items-center font-semibold flex">
-                <Tags className="mr-3" /> Tags: {params.slug}
+                <Tags className="mr-3" /> Tags: {tag}
             </h1>
             <div className="gap-y-16 sm:gap-x-8">
                 <section>
