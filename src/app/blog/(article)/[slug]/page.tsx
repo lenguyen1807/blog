@@ -33,7 +33,7 @@ export default async function Page({params} : Props) {
     }
 
     return (
-        <div className={cn(lora.className)}>
+        <div className={cn()}>
             <BlogHeader article={article} />
             <div className="pt-14 xl:gap-x-20 xl:flex xl:items-start">
                 <aside className="xl:sticky xl:top-20 xl:order-2 pb-16 xl:-me-60 xl:basis-60">
