@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import Transition from "@/components/transition";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -64,9 +63,7 @@ export default function RootLayout({
           >
             <main className="flex min-h-screen w-screen max-w-[60rem] flex-col items-center px-6 pb-10 pt-7 text-[0.92rem] leading-relaxed sm:px-10 lg:px-10">
               <Header />
-                <Transition>
-                  {children}
-                </Transition>
+                {children}
               <Footer />
             </main>
           </ThemeProvider>
