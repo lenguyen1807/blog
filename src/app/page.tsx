@@ -1,6 +1,9 @@
 import ResumeCard from "@/components/misc/resume-card";
 import TextSection from "@/components/misc/text-section";
-import { AboutMe } from "@/lib/const";
+import { 
+  AboutMe, 
+  Icon,
+} from "@/lib/const";
 import Image from "next/image";
 
 export default function Home() {
@@ -31,6 +34,20 @@ export default function Home() {
           imgPath="/homepage/hcmus-logo.webp"
           height="86px"
         />
+      </TextSection>
+      <TextSection title="Programming Language">
+        <div className="flex gap-x-10">
+          <Icon name="Python" content="For AI maybe 🤷‍♂️" />
+          <Icon name="Cpp" content="This is the first language I learnt" />
+          <Icon name="Typescript" content="Fun fact: I don't know Javascript and Typescript is the first web language I use. And I love it." />
+        </div>
+      </TextSection>
+      <TextSection title="Tools/Frameworks">
+        <div className="flex gap-x-10">
+          <Icon name="Pytorch" />
+          <Icon name="Docker" />
+          <Icon name="Next" />
+        </div>
       </TextSection>
     </div>
   );

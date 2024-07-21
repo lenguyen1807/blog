@@ -36,7 +36,7 @@ export default function ArticleCard({article} : ArticleCardProps) {
                             <Badge variant="red-subtle">Draft</Badge>
                         </CardDescription>
                     }
-                    <CardTitle className="sm:text-2xl text-xl">{article.title}</CardTitle>
+                    <CardTitle className="sm:text-2xl text-xl hover:underline">{article.title}</CardTitle>
                     <CardDescription>
                         {`
                             ${formatDate(article.create_date)} 
@@ -56,39 +56,5 @@ export default function ArticleCard({article} : ArticleCardProps) {
                 </CardContent>
             }
         </Card>
-        // <>
-        //     {article.draft && 
-        //         <div className="pb-2">
-        //             <Badge variant="green-subtle">Draft</Badge>
-        //         </div>
-        //     }
-        //     <span className="min-w-[120px]">
-        //         {formatDate(article.create_date)}
-        //     </span>
-        //     {article.update_date &&
-        //         <>
-        //             {" - "}
-        //             <span className="min-w-[120px]">
-        //                 {formatDate(article.update_date)}
-        //             </span>
-        //         </>
-        //     }
-        //     <div className="space-y-2">
-        //         <Link 
-        //             href={`/blog/${article.name}`}
-        //             className={cn("font-medium text-xl hover:underline underline-offset-2")} 
-        //         >
-        //             {article.title}
-        //         </Link>
-        //         <div className="space-x-2">
-        //             {article.tags && article.tags.map((tag) => (
-        //                 <BlogTags tag={tag} key={tag}/>
-        //             ))}
-        //         </div>
-        //         <p className="line-clamp-3 block text-sm italic text-muted-foreground">
-        //             {article.description}
-        //         </p>
-        //     </div>
-        // </>
     )
 }

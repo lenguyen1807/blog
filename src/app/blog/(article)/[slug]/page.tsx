@@ -41,7 +41,7 @@ export default async function Page({params} : Props) {
                 </aside>
                 <BlogContent 
                     content={article.body} 
-                    className="max-w-none prose-a:no-underline hover:prose-a:underline prose-rose" 
+                    className="max-w-none prose-a:no-underline hover:prose-a:underline prose-teal dark:prose-green" 
                 />
             </div>
             <BlogFooter />

@@ -1,7 +1,7 @@
 ---
 title: Neural Network đơn giản với C++ (Phần 1)
 create_date: 07/15/2024
-update_date: 07/15/2024
+update_date: 07/21/2024
 tags:
     - deep learning
     - study
@@ -14,12 +14,80 @@ thumbnail: https://i.redd.it/zjxo20plpms81.jpg
 <MdxImage
 src="https://images.prismic.io/turing/659d7aad531ac2845a274355_Deep_neural_network_25a8b6fa7f.webp?auto=format,compress"
 alt="Neural Network Architecture"
-caption="Kiến trúc của một Neural Network (nguồn: Understanding Feed Forward Neural Networks With Maths and Statistics - turing.com)"
+caption="Hình 1: Kiến trúc của một Neural Network (nguồn: Understanding Feed Forward Neural Networks With Maths and Statistics - turing.com)"
 />
 
-Dựa vào ảnh trên, có thể thấy một Neural Network như là một đồ thị có hướng không chu trình. Trong đó sẽ gồm nhiều nút, mỗi nút được sắp xếp theo từng **layer**, những layer mà không phải input hoặc output thì được gọi là **hidden layer**. Mỗi cạnh của Neural Network sẽ có trọng số hay **weight**.
+Dựa vào ảnh trên, có thể thấy một Neural Network như là một đồ thị có hướng không chu trình. Trong đó sẽ gồm nhiều nút, mỗi nút được gọi là một **Neuron** và được sắp xếp theo từng **layer**, những layer mà không phải input hoặc output thì được gọi là **hidden layer**. Mỗi cạnh của Neural Network sẽ có trọng số hay **weight**.
 
 > Lưu ý là khi ta nói Neural Network có 1 layer, ta sẽ hiểu Neural Network ấy sẽ bao gồm 1 layer input và 1 layer output. Bởi vì khi nói đến layer, ta chỉ nói đến các layer có thể tính toán được, còn input layer chỉ có nhiệm vụ nhận giá trị chứ không tính toán giá trị ấy <MdxCite bibKey="aggarwalIntroductionNeuralNetworks2023"/>.
+
+Neural Network chỉ có 1 layer (gồm input layer và output layer) được gọi là **Perceptron**. Trước khi đi vào Neural Network nhiều layer hơn, ta sẽ tìm hiểu một chút về Perceptron.
+
+<MdxImage
+src="https://drive.google.com/uc?export=view&id=1H8WUAQmKet219-O4uNAeY8BUgdOwWjHj"
+alt="Perceptron Image"
+caption="Hình 2: Một ví dụ về perceptron"
+/>
+
+> Ý tưởng mở rộng output neuron được mình lấy thẳng từ <MdxCite bibKey="aggarwalIntroductionNeuralNetworks2023"/>.
+
+Ở hình 2 là ví dụ về một perceptron gồm $N$ input và 1 output do đó input layer sẽ gồm $N$ neuron và output layer chỉ có 1 neuron. Có thể thấy, neuron output $y$ sẽ được tính bằng tổ hợp tuyến tính của các input neuron (trong đó có các trọng số $w_i$ tương ứng với input neuron $x_i$), sau đó tổ hợp tuyến tính ấy sẽ đi qua một hàm $\phi$.
+$$
+y = \phi\left( \sum_{i=1}^N w_ix_i \right)
+$$
+
+Ta gọi hàm $\phi$ là **hàm activation**, ngoài ra phần tổ hợp tuyến tính có khi được gọi là *pre-activation* và kí hiệu là $a$ (nhưng ở perceptron thì ta chưa cần kí hiệu vậy đâu). Hiện tại đã có rất nhiều hàm activation, ví dụ như:
+- Hàm sigmoid (mình sẽ kí hiệu là $\sigma$):
+$$
+\phi(x) = \sigma(x) = \dfrac{1}{1 + e^x}
+$$
+
+<MdxPlotFunc
+id="sigmoid_func"
+fn="1/(1 + exp(-x))"
+xrange={[-3, 3]}
+yrange={[0, 1]}
+/>
+
+- Hàm tanh:
+$$
+\phi(x) = \tanh(x) = \dfrac{e^x - e^{-x}}{e^x + e^{-x}}
+$$
+
+<MdxPlotFunc
+id="tanh_func"
+fn="(exp(x) - exp(-x))/(exp(x) + exp(-x))"
+xrange={[-3, 3]}
+yrange={[-1, 1]}
+/>
+
+- Hàm ReLU [^6]:
+$$
+\phi(x) = \text{ReLU}(x) = \max(0, x) = \begin{cases}
+x \hspace{10pt} \text{nếu $x > 0$} \\
+0 \hspace{10pt} \text{còn lại}
+\end{cases}
+$$
+
+<MdxPlotFunc
+id="relu_func"
+fn="max(0, x)"
+xrange={[-3, 3]}
+yrange={[-1, 1]}
+/>
+
+- Hay có thể là hàm Linear 💀:
+$$
+\phi(x) = x
+$$
+
+## Deep Neural Network
+
+<MdxImage
+src="https://drive.google.com/uc?export=view&id=1HANtdbu1pmgET2kiZcutpucNnKantW-7"
+alt="Multi-layer Perceptron Image"
+caption="Hình 3: Một ví dụ về multi-layer perceptron (hay deep neural network)"
+/>
 
 ## Những dòng code đầu tiên: Ma trận
 
@@ -286,3 +354,4 @@ source="cpp-nn.bib"
 [^3]: https://stackoverflow.com/questions/13121469/initializing-a-vector-of-vectors-having-a-fixed-size-with-boost-assign
 [^4]: https://en.cppreference.com/w/cpp/language/constructor
 [^5]: https://cs231n.github.io/neural-networks-2/#init
+[^6]: https://en.wikipedia.org/wiki/Rectifier_(neural_networks)

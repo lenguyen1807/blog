@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     google: "IXEnsPVZr2kilN8R7cEUNCEafBriaxF56diq5mhRdGg",
   },
   title: {
-    template: "%s | le nguyen's blog",
-    default: "le nguyen's blog",
+    template: "%s | le nguyen",
+    default: "le nguyen",
   },
   description: "I'm an enthuasiaist in AI and Mathematics",
   keywords: [

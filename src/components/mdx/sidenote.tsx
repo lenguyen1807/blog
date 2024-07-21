@@ -14,8 +14,7 @@ export default function MdxSidenote ({
     return (
         <>
             {content}
-            <label htmlFor={id} className="sidenote-toggle sidenote-number">
-            </label>
+            <label htmlFor={id} className="sidenote-toggle sidenote-number"></label>
             <input type="checkbox" id={id} className="sidenote-toggle" />
             <span className="sidenote left">{note}</span>
         </>
