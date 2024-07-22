@@ -36,17 +36,17 @@ export default function Home() {
         />
       </TextSection>
       <TextSection title="Programming Language">
-        <div className="flex gap-x-10">
-          <Icon name="Python" content="For AI maybe 🤷‍♂️" />
-          <Icon name="Cpp" content="This is the first language I learnt" />
-          <Icon name="Typescript" content="Fun fact: I don't know Javascript and Typescript is the first web language I use. And I love it." />
+        <div className="flex gap-x-10 items-center">
+          <Icon name="Cpp" content="This is the first language I learnt. I really want to master it but you know, it is hard 💀. Also it is the first choice when it comes to writing something from scratch (which I love to do 🍉). I don't know C and I think C is completely different than C++, so yeah, if you tell me to write C, I would kill myself." />
+          <Icon name="Python" content="I love how easy it is (not that easy, it is only easy when compare to C++). In AI, this is the first class language, a lot of supports and users, so why don't use this 🤷‍♂️." />
+          <Icon name="Typescript" content="Fun fact: I don't know Javascript and Typescript is the first web language I used. And I love it but sometimes I have to wonder if I can punch myself in the face when type errors came up." />
         </div>
       </TextSection>
-      <TextSection title="Tools/Frameworks">
-        <div className="flex gap-x-10">
-          <Icon name="Pytorch" />
-          <Icon name="Docker" />
-          <Icon name="Next" />
+      <TextSection title="Tools">
+        <div className="flex gap-x-10 items-center">
+          <Icon name="Pytorch" content="Just don't use Tensorflow bro, Pytorch is and always has been the first class framework for deep learning." />
+          <Icon name="Docker" content="Still finding some use cases for this 🕵️." />
+          <Icon name="Next" content="The first framework I used and this took my hand to the world of Web. Use this for my blog (this blog) too." />
         </div>
       </TextSection>
     </div>

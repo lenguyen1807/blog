@@ -25,9 +25,9 @@ export default function Toc({tocs, className} : TocProps) {
 
 function RenderToc({tocs} : TocProps) {
     return (
-        <ul>
+        <ul className="space-y-1">
             {tocs.map((toc) => (
-                <li key={toc.data.id} className="space-y-2">
+                <li key={toc.data.id} className="space-y-1">
                     <TocLink toc={toc} />
                     {toc.children?.length > 0 && 
                     <RenderToc tocs={toc.children} />}

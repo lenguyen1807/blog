@@ -84,7 +84,7 @@ function ToolTip({children, content} : {children: React.ReactNode, content?: str
                 <TooltipTrigger>
                     {children}
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent className="text-pretty w-96">
                     {content}
                 </TooltipContent>
             </Tooltip>

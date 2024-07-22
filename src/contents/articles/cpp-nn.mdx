@@ -1,7 +1,7 @@
 ---
 title: Neural Network đơn giản với C++ (Phần 1)
 create_date: 07/15/2024
-update_date: 07/21/2024
+update_date: 07/22/2024
 tags:
     - deep learning
     - study
@@ -22,6 +22,10 @@ Dựa vào ảnh trên, có thể thấy một Neural Network như là một đ�
 > Lưu ý là khi ta nói Neural Network có 1 layer, ta sẽ hiểu Neural Network ấy sẽ bao gồm 1 layer input và 1 layer output. Bởi vì khi nói đến layer, ta chỉ nói đến các layer có thể tính toán được, còn input layer chỉ có nhiệm vụ nhận giá trị chứ không tính toán giá trị ấy <MdxCite bibKey="aggarwalIntroductionNeuralNetworks2023"/>.
 
 Neural Network chỉ có 1 layer (gồm input layer và output layer) được gọi là **Perceptron**. Trước khi đi vào Neural Network nhiều layer hơn, ta sẽ tìm hiểu một chút về Perceptron.
+
+> Một phần lưu ý nữa, Neural Network có thể là một đồ thị có chu trình và sẽ được gọi là **Recurrent Neural Network**, còn Neural Network mà chúng ta đang nói tới (có hướng không chu trình) được gọi là **Feed Forward Neural Network**. Và mỗi khi nhắc đến Neural Network trong bài này ta sẽ hiểu nó là Feed Forward Neural Network nhé. Ngoài ra mỗi neuron đều có cạnh nối tới nó, do đó có thể nghe đến term **Fully-Connected Neural Network**.
+
+### Perceptron
 
 <MdxImage
 src="https://drive.google.com/uc?export=view&id=1H8WUAQmKet219-O4uNAeY8BUgdOwWjHj"
@@ -81,13 +85,45 @@ $$
 \phi(x) = x
 $$
 
-## Deep Neural Network
+<MdxImage
+src="https://drive.google.com/uc?export=view&id=1HPKVxzQAXHqGo0hqbvy04MvMklxHLzjN"
+alt="Perceptron matrix"
+caption="Hình 3: Perceptron dưới dạng ma trận và vector"
+/>
+
+<MdxImage
+src="https://drive.google.com/uc?export=view&id=1HPp7pezze9EoEOEV8B9AWct3I7ZAeHtb"
+alt="Perceptron matrix"
+caption="Hình 4: Perceptron dưới dạng ma trận và vector (biểu diễn khác)"
+/>
+
+Nhìn hình 3 và 4 thì ta có thể đưa một Perceptron về dạng ma trận trọng số $W$ và vector input $\mathbf{x}$, vector output $\mathbf{y}$ (các vector đều là vector cột):
+$$
+\mathbf{y} = \phi(W \cdot \mathbf{x})
+$$
+trong đó $W$ sẽ có số dòng tương ứng với chiều của $\mathbf{y}$ và số cột tương ứng với số chiều của $\mathbf{x}$. Nếu mở rộng hơn, số dòng sẽ tương ứng với chiều của layer hiện tại và số cột tương ứng với layer trước đó.
+
+### Deep Neural Network
 
 <MdxImage
 src="https://drive.google.com/uc?export=view&id=1HANtdbu1pmgET2kiZcutpucNnKantW-7"
 alt="Multi-layer Perceptron Image"
-caption="Hình 3: Một ví dụ về multi-layer perceptron (hay deep neural network)"
+caption="Hình 5: Một ví dụ về multi-layer perceptron (hay deep neural network)"
 />
+
+Có thể thấy, deep neural network được tạo ra bằng cách thêm nhiều lớp hidden layer ở giữa input layer và output layer. Đây cũng là lý do mà nó còn tên khác là **Multi-layer Perceptron** (hay **MLP**) bởi vì đơn giản nó là Perceptron và có thêm nhiều layer ở giữa (Multi-layer).
+
+<MdxImage
+src="https://drive.google.com/uc?export=view&id=1HPIHTYCeoFAsMuEwXWweoGmkLM8OdAX3"
+alt="Multi-layer Perceptron Image"
+caption="Hình 6: Deep Neural Network biểu diễn dưới dạng ma trận và vector"
+/>
+
+Dựa vào hình 6, để tính được output của một Neural Network (gọi tắt của Deep Neural Network) ta sẽ thực hiện tính từng hidden layer bằng cách nhân với ma trận trọng số tương ứng. Để tính được output $\mathbf{y}$ ta phải tính hidden layer $h_N$, tương tự để tính $h_{N}$ phải tính được hidden layer $h_{N-1}$. Vậy tất cả chỉ là nhân ma trận với vector thôi hay sao 😭. Thật ra là còn nhiều hơn nữa nhưng mà đơn giản vậy là được rồi.
+
+Nếu để ý, việc tính được output $\mathbf{y}$ thì cần bắt đầu từ input $\mathbf{x}$ sau đó tiến đến hidden layer thứ nhất, thứ hai, ... cho đến hidden layer cuối cùng, do đó nó còn được gọi là bước **Forward** (tiến về phía trước ấy). Ta sẽ còn một bước nữa gọi là **Backward** mà mình và các bạn sẽ cùng tìm hiểu ở phần 2 nhé.
+
+Một trong những dòng code đầu tiên khi code Neural Network đó chính là phải code được ma trận và tất cả phép toán của nó ví dụ như phép nhân, cộng, chuyển vị, ...
 
 ## Những dòng code đầu tiên: Ma trận
 
@@ -343,7 +379,7 @@ Matrix Matrix::Randomized(size_t rows, size_t cols)
 }
 ```
 
-Vậy là xong class Ma trận rồi ấy, cảm ơn các bạn đã đọc đến đây hehe 🍉. Bây giờ cùng qua phần sau [Neural Network đơn giản với C++ (Phần 2)](/blog/cpp-nn-2) thôi.
+Vậy là xong class Ma trận rồi ấy, cảm ơn các bạn đã đọc đến đây hehe 🍉. Ở phần sau [Neural Network đơn giản với C++ (Phần 2)](/blog/cpp-nn-2) ta sẽ đi qua kỹ thuật Backpropagation (hay còn gọi là Backward) và cách train Deep Neural Network.
 
 <MdxBib
 source="cpp-nn.bib"
