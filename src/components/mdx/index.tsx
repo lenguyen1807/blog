@@ -5,6 +5,7 @@ import MdxYoutube from "./youtube"
 import MdxVideo from "./video"
 import MdxBib from "./bib"
 import MdxCite from "./cite"
+import MdxPlotFunc from "./plot-func"
 
 export const MdxComponent = {
     MdxYoutube,
@@ -13,5 +14,6 @@ export const MdxComponent = {
     MdxMathBlock,
     MdxVideo,
     MdxBib,
-    MdxCite
+    MdxCite,
+    MdxPlotFunc
 }

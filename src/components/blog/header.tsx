@@ -11,7 +11,7 @@ interface BlogHeaderProps {
 export default function BlogHeader({article, className} : BlogHeaderProps) {
     return (
         <div className={cn("space-y-6 my-10", className)}>
-            {
+            {/* {
                 article.thumbnail && (
                     <div className="aspect-h-9 aspect-w-16 mb-12">
                         <Image 
@@ -25,7 +25,7 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
                         />
                     </div>
                 )
-            }
+            } */}
             <div className="animate flex items-center gap-1.5">
             {article.update_date
             ? <div className="font-base text-base">

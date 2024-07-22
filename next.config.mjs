@@ -4,6 +4,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 const nextConfig = {
     experimental: {
         optimizePackageImports: ['package-name'],
+        esmExternals: 'loose'
     },
     images: {
         remotePatterns: [

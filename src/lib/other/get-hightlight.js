@@ -16,7 +16,7 @@ export function useHighlighted(id) {
         };
 
         observer.current = new IntersectionObserver(handleObserver, {
-            rootMargin: "0% 0% -15% 0px",
+            rootMargin: "0% 0% -35% 0px",
         });
 
         const elements = document.querySelectorAll("h2, h3, h4");

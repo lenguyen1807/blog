@@ -25,7 +25,7 @@ export default function Header() {
                     className="flex-none text-xl font-semibold"
                     href="/"
                 >
-                    le nguyen's blog
+                    le nguyen 🍉
                 </Link>
                 <div className="flex flex-row items-center justify-center">
                     <LinkLabel title="blog" href="/blog" />
