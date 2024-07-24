@@ -17,7 +17,7 @@ export default function Home() {
             sizes="100vw"
             width={0}
             height={0}
-            className="rounded-none"
+            className="rounded-full"
         />
         <div className="flex flex-col items-center gap-y-4">
           <h1 className="text-3xl font-bold">Le Nguyen 🍉</h1>
