@@ -58,7 +58,7 @@ export default function RootLayout({
         <body className={cn("min-h-screen bg-background font-sans antialiased flex justify-center", inter.variable)}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >

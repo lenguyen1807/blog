@@ -1,13 +1,15 @@
 ---
-title: Neural Network đơn giản với C++ (Phần 1)
+title: Cùng mình xây dựng Neural Network đơn giản (Phần 1)
 create_date: 07/15/2024
-update_date: 07/22/2024
+update_date: 07/24/2024
 tags:
     - deep learning
     - study
 draft: true
 thumbnail: https://i.redd.it/zjxo20plpms81.jpg
 ---
+
+> Toàn bộ source code nằm ở: https://github.com/lenguyen1807/mnist-cpp
 
 ## Neural Network là gì ?
 
@@ -40,6 +42,18 @@ $$
 y = \phi\left( \sum_{i=1}^N w_ix_i \right)
 $$
 
+Ngoài ra còn một thứ mà mình chưa nhắc đến đó là **Bias**, tức là ta sẽ cộng thêm một hằng số nữa, gọi là $b$ đi.
+$$
+y = \phi\left( \sum_{i=1}^N w_ix_i + b \right)
+$$
+
+Nếu đặt $b = w_0$ thì ta sẽ có:
+$$
+y = \phi\left( w_0 + x_1w_1 + ... + w_Nx_N \right)
+$$
+
+Vậy vector input $\mathbf{x}$ lúc này trở thành $\{1, x_1, ..., x_N\}$ (thêm $1$ vào đầu) và $\mathbf{w} = \{w_0, ..., w_N\}$. Nhưng mình chỉ nhắc đến thôi, từ đây về cuối luôn mình sẽ không dùng đến bias (bởi vì nó làm mọi thứ rối hơn và mình không đủ khả năng để handle 😭).
+
 Ta gọi hàm $\phi$ là **hàm activation**, ngoài ra phần tổ hợp tuyến tính có khi được gọi là *pre-activation* và kí hiệu là $a$ (nhưng ở perceptron thì ta chưa cần kí hiệu vậy đâu). Hiện tại đã có rất nhiều hàm activation, ví dụ như:
 - Hàm sigmoid (mình sẽ kí hiệu là $\sigma$):
 $$
@@ -69,7 +83,7 @@ yrange={[-1, 1]}
 $$
 \phi(x) = \text{ReLU}(x) = \max(0, x) = \begin{cases}
 x \hspace{10pt} \text{nếu $x > 0$} \\
-0 \hspace{10pt} \text{còn lại}
+0 \hspace{10pt}
 \end{cases}
 $$
 
@@ -103,6 +117,7 @@ $$
 $$
 trong đó $W$ sẽ có số dòng tương ứng với chiều của $\mathbf{y}$ và số cột tương ứng với số chiều của $\mathbf{x}$. Nếu mở rộng hơn, số dòng sẽ tương ứng với chiều của layer hiện tại và số cột tương ứng với layer trước đó.
 
+
 ### Deep Neural Network
 
 <MdxImage
@@ -126,6 +141,8 @@ Nếu để ý, việc tính được output $\mathbf{y}$ thì cần bắt đầ
 Một trong những dòng code đầu tiên khi code Neural Network đó chính là phải code được ma trận và tất cả phép toán của nó ví dụ như phép nhân, cộng, chuyển vị, ...
 
 ## Những dòng code đầu tiên: Ma trận
+
+> Để hiểu rõ và làm cực hơn một tí thì mình với các bạn sẽ cùng code C++ 😈.
 
 Đầu tiên ta phải có 1 class ma trận. Ở đây mình chọn `std::vector` ví nó đơn giản, dễ sử dụng cực kì. Còn tại sao lại dùng `size_t` mà không dùng `int`, bởi vì nếu bạn gọi `length()` của vector thì giá trị trả về là `size_t` chứ không phải `int`, nên nếu dùng `int` tức là bạn đang ép kiểu từ `size_t` về `int`.
 
@@ -340,7 +357,7 @@ Matrix Matrix::Flatten(const Matrix& mat)
 }
 ```
 
-Cuối cùng là mình phải tìm cách để khởi tạo weight cho Neural Network một cách tối ưu nhất, theo [^5] thì khởi tạo trọng số như sau: Với mỗi trọng số $w$, ta lấy $w$ từ một phân phối chuẩn có trung bình là $0$ và phương sai là $\sqrt{\left( 2/n \right)}$ với $n$ là số chiều của vector input (hay đúng hơn là chiều của layer phía trước).
+Tiếp theo là mình phải tìm cách để khởi tạo weight cho Neural Network một cách tối ưu nhất, theo [^5] thì khởi tạo trọng số như sau: Với mỗi trọng số $w$, ta lấy $w$ từ một phân phối chuẩn có trung bình là $0$ và phương sai là $\sqrt{\left( 2/n \right)}$ với $n$ là số chiều của vector input (hay đúng hơn là chiều của layer phía trước).
 
 ```cpp title="matrix.h"
 class Matrix
@@ -376,6 +393,33 @@ Matrix Matrix::Randomized(size_t rows, size_t cols)
     }
 
     return res;
+}
+```
+
+À còn cái cuối cùng, mình cần dùng được một hàm Element-wise trên class Matrix (ví dụ như dùng Activation lên class Matrix). Mình sẽ viết hàm `Apply()` (giống tương tự như hàm `apply` trong `pandas`), ```std::function<double(double)>``` nghĩa là một hàm có một tham số kiểu double (cái ngoặc tròn double ý) và kiểu trả về là double (phía ngoài), tức là đây là kiểu dữ liệu của hàm (mình truyền hàm như tham số) của C++11 trở lên.
+
+```cpp title="matrix.h"
+class Matrix
+{
+    // ...
+    // Apply a function to matrix
+    Matrix Apply(const std::function<double(double)>& func);
+    // ...
+}
+```
+
+```cpp title="matrix.cpp"
+Matrix Matrix::Apply(const std::function<double(double)>& func)
+{
+    Matrix mat(rows, cols);
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            mat.values[i][j] = func(this->values[i][j]);
+        }
+    }
+    return mat;
 }
 ```
 
