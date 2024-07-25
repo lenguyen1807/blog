@@ -18,7 +18,6 @@ interface ProjectCardProps extends React.HTMLAttributes<HTMLDivElement> {
     href?: string,
 }
 
-
 export default function ProjectCard({
     heading,
     subheading,
@@ -43,7 +42,7 @@ export default function ProjectCard({
                 }
                 <Link href={href}>
                     <CardHeader>
-                        <CardTitle className="text-lg">{heading}</CardTitle>
+                        <CardTitle className="hover:underline text-lg">{heading}</CardTitle>
                         {subheading && <CardDescription className="text-sm">{subheading}</CardDescription>}
                         {date && <CardDescription className="text-sm">{date}</CardDescription>}
                     </CardHeader>

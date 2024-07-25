@@ -1,5 +1,5 @@
 ---
-title: Neural Network đơn giản với C++ (Phần 1)
+title: Cùng mình xây dựng Neural Network đơn giản (Phần 1)
 create_date: 07/15/2024
 update_date: 07/24/2024
 tags:
@@ -83,7 +83,7 @@ yrange={[-1, 1]}
 $$
 \phi(x) = \text{ReLU}(x) = \max(0, x) = \begin{cases}
 x \hspace{10pt} \text{nếu $x > 0$} \\
-0 \hspace{10pt} \text{còn lại}
+0 \hspace{10pt}
 \end{cases}
 $$
 
@@ -141,6 +141,8 @@ Nếu để ý, việc tính được output $\mathbf{y}$ thì cần bắt đầ
 Một trong những dòng code đầu tiên khi code Neural Network đó chính là phải code được ma trận và tất cả phép toán của nó ví dụ như phép nhân, cộng, chuyển vị, ...
 
 ## Những dòng code đầu tiên: Ma trận
+
+> Để hiểu rõ và làm cực hơn một tí thì mình với các bạn sẽ cùng code C++ 😈.
 
 Đầu tiên ta phải có 1 class ma trận. Ở đây mình chọn `std::vector` ví nó đơn giản, dễ sử dụng cực kì. Còn tại sao lại dùng `size_t` mà không dùng `int`, bởi vì nếu bạn gọi `length()` của vector thì giá trị trả về là `size_t` chứ không phải `int`, nên nếu dùng `int` tức là bạn đang ép kiểu từ `size_t` về `int`.
 
