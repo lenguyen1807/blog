@@ -13,7 +13,7 @@ export default function Footer() {
                         <div className="flex items-center gap-x-4">
                             <Link
                                 className="inline-block text-muted-foreground transition-all hover:text-muted-foreground/75"
-                                href="https://github.com/lenguyen1807"
+                                href="https://github.com/lenguyen1807/blog"
                             >
                                 {/* ref: https://codepen.io/Leloush89/pen/QMQRPE */}
                                 <svg 

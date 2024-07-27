@@ -1,13 +1,21 @@
 ---
 title: Cùng mình xây dựng Neural Network đơn giản (Phần 1)
 create_date: 07/15/2024
-update_date: 07/26/2024
+update_date: 07/27/2024
 tags:
     - deep learning
     - study
 draft: false
 thumbnail: https://i.redd.it/zjxo20plpms81.jpg
 ---
+
+<MdxUpdate title="Các cập nhật">
+<ul>
+    <li>25/07/2024: Nhắc sơ qua phần bias. </li>
+    <li>26/07/2024: Thêm implementation các hàm activation và Softmax. </li>
+    <li>27/07/2024: Sửa lỗi sai ở activation Sigmoid và ở phần Matrix::Randomized.</li>
+</ul>
+</MdxUpdate>
 
 > Toàn bộ source code nằm ở: https://github.com/lenguyen1807/mnist-cpp
 
@@ -57,7 +65,7 @@ Vậy vector input $\mathbf{x}$ lúc này trở thành $\{1, x_1, ..., x_N\}$ (t
 Ta gọi hàm $\phi$ là **hàm activation**, ngoài ra phần tổ hợp tuyến tính có khi được gọi là *pre-activation* và kí hiệu là $a$ (nhưng ở perceptron thì ta chưa cần kí hiệu vậy đâu). Hiện tại đã có rất nhiều hàm activation, ví dụ như:
 - Hàm sigmoid (mình sẽ kí hiệu là $\sigma$):
 $$
-\phi(x) = \sigma(x) = \dfrac{1}{1 + e^x}
+\phi(x) = \sigma(x) = \dfrac{1}{1 + e^{-x}}
 $$
 
 <MdxPlotFunc
@@ -386,7 +394,7 @@ Matrix Matrix::Flatten(const Matrix& mat)
 }
 ```
 
-Tiếp theo là mình phải tìm cách để khởi tạo weight cho Neural Network một cách tối ưu nhất, theo [^5] thì khởi tạo trọng số như sau: Với mỗi trọng số $w$, ta lấy $w$ từ một phân phối chuẩn có trung bình là $0$ và phương sai là $\sqrt{\left( 2/n \right)}$ với $n$ là số chiều của vector input (hay đúng hơn là chiều của layer phía trước).
+Tiếp theo là mình phải tìm cách để khởi tạo weight cho Neural Network một cách tối ưu nhất, theo [^5] thì khởi tạo trọng số như sau: Với mỗi trọng số $w$, ta lấy $w$ từ một phân phối chuẩn có trung bình là $0$ và phương sai là $2/n$ với $n$ là số chiều của vector input (hay đúng hơn là chiều của layer phía trước).
 
 ```cpp title="matrix.h"
 class Matrix
@@ -409,8 +417,8 @@ Matrix Matrix::Randomized(size_t rows, size_t cols)
     std::mt19937 generator(rand_dev());
 
     // https://cs231n.github.io/neural-networks-2/#init
-    double var = 2.0f / sqrt(static_cast<double>(cols)); 
-    std::uniform_real_distribution<double> distr(0, var);
+    double std = 2.0f / static_cast<double>(cols); 
+    std::normal_distribution<double> distr(0, std);
 
     Matrix res(rows, cols);
     for (size_t i = 0; i < rows; i++)
@@ -459,7 +467,7 @@ Các hàm activation mà chúng ta đã biết phía trên cũng không quá kh�
 ```cpp
 double Sigmoid(double x) 
 {
-    return (1 / std::exp(-x));
+    return (1 / (1 + std::exp(-x)));
 }
 
 double ReLU(double x) 
@@ -489,27 +497,19 @@ $$
 Có thể thấy các phần tử của vector $\text{softmax}$ luôn có giá trị nằm trong khoảng $(0, 1)$ ngoài ra tổng các phần tử của vector bằng $1$ do đó vector $\text{softmax}$ này có thể được người ta xem như vector phân phối vậy, trong đó mỗi phần tử được xem như là xác suất. Ngoài ra hàm activation Softmax thường được áp dụng cho layer cuối, khi đó output cho ra sẽ là xác suất. Ví dụ như output layer cuối cùng gồm 10 phần tử, ta xem mỗi phần tử ấy là 1 lớp, sau khi qua Softmax thì mỗi lớp sẽ có giá trị xác suất tương ứng của mình.
 
 ```cpp
-// việc dùng using cũng giống như #define để gõ nhanh hơn :>
-// Ở đây mình không truyền thẳng class Matrix vào 
-// mà truyền std::vector<std::vector<double>>
-// là vì cách mình cài đặt :>
-// xem source code sẽ rõ hơn.
-using MatrixType = std::vector<std::vector<double>>;
-
-MatrixType SoftMax(const MatrixType& x)
+Matrix SoftMax(const Matrix& x)
 {
-    // mình giả sử ma trận truyền vào có cột = 1 (xem như 1 vector)
-    MatrixType result(x.size(), std::vector<double>(1));
+    // suppose x is a column vector
+    assert(x.cols == 1);
+
+    Matrix result(x.rows, 1);
     double total = 0.0;
 
-    for (size_t i = 0; i < x.size(); i++)
-        total += std::exp(x[i][0]);        
+    for (size_t i = 0; i < x.rows; i++)
+        total += std::exp(x.values[i][0]);        
 
-    for (size_t i = 0; i < x.size(); i++)
-    {
-        std::vector<double> temp = {std::exp(x[i][0]) / total};
-        result.emplace_back(temp);
-    }
+    for (size_t i = 0; i < x.rows; i++)
+        result.values[i][0] = (std::exp(x.values[i][0]) / total);
 
     return result;
 }
