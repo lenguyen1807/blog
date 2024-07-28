@@ -1,7 +1,7 @@
 "use client"
 
 import functionPlot from "function-plot";
-import { useEffect } from "react";
+import { useEffect, memo, useRef } from "react";
 
 interface PlotFuncProps {
     id: string,
@@ -14,16 +14,15 @@ interface PlotFuncProps {
     ylabel?: string,
 }
 
-export default function MdxPlotFunc({
+// ref: https://github.com/mauriciopoppe/function-plot/issues/278
+export const MdxPlotFunc = memo(({
     id, fn, width, height, xrange, yrange, xlabel, ylabel
-} : PlotFuncProps) {
-
-    // f**k my life: https://github.com/mauriciopoppe/function-plot/issues/278
-
+} : PlotFuncProps) => {
+    const ref = useRef(null);
     useEffect(() => {
         try {
             functionPlot({
-                target: `#${id}`,
+                target: ref.current,
                 width: width === undefined ? 700 : width,
                 height: height === undefined ? 300 : height,
                 data: [{
@@ -44,6 +43,6 @@ export default function MdxPlotFunc({
     }, [id, fn, width, height, xrange, yrange, xlabel, ylabel])
 
     return (
-        <div id={id} className="lg:block hidden"/>
+        <div ref={ref} className="lg:block hidden"/>
     )
-}
+}, () => false);

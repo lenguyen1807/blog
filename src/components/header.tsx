@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ModeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
+import EyeIcon from "./misc/eye-icon";
 
 function LinkLabel({title, href} : {title: string, href: string}) {
     return (
@@ -25,7 +26,10 @@ export default function Header() {
                     className="flex-none text-xl font-semibold"
                     href="/"
                 >
-                    le nguyen 🍉
+                    <div className="flex gap-x-3 items-center">
+                        <span>le nguyen</span>
+                        {/* <EyeIcon /> */}
+                    </div>
                 </Link>
                 <div className="flex flex-row items-center justify-center">
                     <LinkLabel title="blog" href="/blog" />

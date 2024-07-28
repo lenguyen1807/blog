@@ -24,17 +24,19 @@ export default function BlogFooter() {
         )
     } else {
         return (
-            <Button 
-                className="float-right"
-                variant="outline"
-                onClick={() => (window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                }))}
-            >
-                <ChevronUp className="h-5 w-5 mr-2" />
-                Go to top
-            </Button>
+            <div className="pt-14">
+                <Button 
+                    className="float-right"
+                    variant="outline"
+                    onClick={() => (window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    }))}
+                >
+                    <ChevronUp className="h-5 w-5 mr-2" />
+                    Go to top
+                </Button>
+            </div>
         )
     }
 }

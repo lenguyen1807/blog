@@ -42,7 +42,7 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
                     {readingTime(article.body)}
                 </div>
             </div>
-            <div className="animate text-3xl lg:text-5xl font-semibold">
+            <div className="text-3xl font-semibold">
                 {article.title}
             </div>
             <div className="space-x-2">

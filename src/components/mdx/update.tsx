@@ -13,8 +13,10 @@ interface UpdateProps {
 export default function MdxUpdate({children, title} : UpdateProps) {
     return (
         <Accordion type="single" collapsible className="pb-4 w-full">
-            <AccordionItem value="item-1" className="border-2 rounded-lg px-5">
-                <AccordionTrigger className="py-0">{title}</AccordionTrigger>
+            <AccordionItem value="item-1" className="px-5">
+                <AccordionTrigger className="py-0 text-lg">
+                    {title}
+                </AccordionTrigger>
                 <AccordionContent className="text-base">
                     {children}
                 </AccordionContent>

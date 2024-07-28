@@ -18,8 +18,8 @@ export interface ArticleCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function ArticleCard({article} : ArticleCardProps) {
     return (
-        <Card className="flex flex-col rounded-2xl border border-border shadow-sm transition-all hover:border-foreground/25 hover:shadow-md">
-            {article.thumbnail && 
+        <Card className="flex flex-col rounded-2xl border-2 border-border shadow-sm transition-all hover:border-foreground/25 hover:shadow-md">
+            {/* {article.thumbnail && 
                 <Image
                     src={article.thumbnail}
                     alt="resume-image"
@@ -28,7 +28,7 @@ export default function ArticleCard({article} : ArticleCardProps) {
                     height={0}
                     className={cn("w-auto h-auto rounded-2xl rounded-bl-none rounded-br-none border-b-2 border-border")}
                 />
-            }
+            } */}
             <Link href={`/blog/${article.name}`}>
                 <CardHeader className="space-y-3">
                     {article.draft && 
