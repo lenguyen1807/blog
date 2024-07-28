@@ -15,7 +15,7 @@ interface PlotFuncProps {
 }
 
 // ref: https://github.com/mauriciopoppe/function-plot/issues/278
-export const MdxPlotFunc = memo(({
+const MdxPlotFunc = memo(({
     id, fn, width, height, xrange, yrange, xlabel, ylabel
 } : PlotFuncProps) => {
     const ref = useRef(null);
@@ -46,3 +46,7 @@ export const MdxPlotFunc = memo(({
         <div ref={ref} className="lg:block hidden"/>
     )
 }, () => false);
+
+MdxPlotFunc.displayName = 'MdxPlotFunc';
+
+export default MdxPlotFunc;
