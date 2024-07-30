@@ -26,7 +26,7 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
                     </div>
                 )
             } */}
-            <div className="animate flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5">
             {article.update_date
             ? <div className="font-base text-base">
                     {"Last update: "}

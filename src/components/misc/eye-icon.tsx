@@ -16,17 +16,16 @@ export default function EyeIcon() {
         window.addEventListener("mousemove", (e) => {
             pupils.forEach((pupil) => {
                 // ref: https://stackoverflow.com/questions/73779213/mouse-tracking-eyes-logo-animation-javascript
-                const x = pupil.getBoundingClientRect().left + pupil.clientWidth / 2;
-                const y = pupil.getBoundingClientRect().top + pupil.clientHeight / 2;
-                const radian = Math.atan2(e.pageX - x, e.pageY - y);
-                const rotate = radian * (180 / Math.PI) * -1 + 270;
-                pupil.style.transform = "rotate(" + rotate + "deg)";
+                const rect = pupil.getBoundingClientRect();
+                const x = (e.pageX - rect.left) / 200;
+                const y = (e.pageY - rect.top) / 200;
+                pupil.style.transform = "translate3d(" + (x < pupil.clientWidth) ? `${x}px` : `${pupil.clientWidth}px` + "," + y + ", 0px)";
             });
         });
     }, [])
 
     return (
-        <div className="justify-center items-center flex-row gap-x-1 hidden lg:flex">
+        <div className="justify-center items-center gap-x-1 flex">
             <Eye />
             <Eye />
         </div>

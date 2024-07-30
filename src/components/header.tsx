@@ -28,7 +28,7 @@ export default function Header() {
                 >
                     <div className="flex gap-x-3 items-center">
                         <span>le nguyen</span>
-                        {/* <EyeIcon /> */}
+                        <EyeIcon />
                     </div>
                 </Link>
                 <div className="flex flex-row items-center justify-center">
