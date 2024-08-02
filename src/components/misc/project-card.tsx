@@ -30,7 +30,7 @@ export default function ProjectCard({
     if (href) {
         return (
             <Card className="flex flex-col rounded-2xl border border-border shadow-sm transition-all hover:border-foreground/50 hover:shadow-md">
-                {imgPath && 
+                {/* {imgPath && 
                     <Image
                         src={imgPath}
                         alt="resume-image"
@@ -39,7 +39,7 @@ export default function ProjectCard({
                         height={0}
                         className={cn("w-auto rounded-2xl rounded-bl-none rounded-br-none border-b-2 border-border", height)}
                     />
-                }
+                } */}
                 <Link href={href}>
                     <CardHeader>
                         <CardTitle className="hover:underline text-lg">{heading}</CardTitle>

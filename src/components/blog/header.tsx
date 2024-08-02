@@ -1,7 +1,7 @@
 import { IArticle } from "@/lib/interface"
 import { cn, formatDate, readingTime } from "@/lib/utils"
-import Image from "next/image";
-import BlogTags from "./tags";
+// import Image from "next/image";
+// import BlogTags from "./tags";
 
 interface BlogHeaderProps {
     article: IArticle,
@@ -10,7 +10,7 @@ interface BlogHeaderProps {
 
 export default function BlogHeader({article, className} : BlogHeaderProps) {
     return (
-        <div className={cn("space-y-6 my-10", className)}>
+        <div className={cn("space-y-3 pt-4 pb-10", className)}>
             {/* {
                 article.thumbnail && (
                     <div className="aspect-h-9 aspect-w-16 mb-12">
@@ -26,30 +26,28 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
                     </div>
                 )
             } */}
-            <div className="flex items-center gap-1.5">
-            {article.update_date
-            ? <div className="font-base text-base">
-                    {"Last update: "}
-                    {formatDate(article.update_date)}
-                </div>
-            : <div className="font-base text-base">
-                    {"Create date: "}
-                    {formatDate(article.create_date)}
-                </div>
-            }
-                <span>{"/"}</span>
-                <div className="font-base text-base">
-                    {readingTime(article.body)}
-                </div>
-            </div>
             <div className="text-3xl font-semibold">
                 {article.title}
             </div>
-            <div className="space-x-2">
+            <div className="flex items-center gap-1.5">
+            {article.update_date
+            ? <div className="text-base text-muted-foreground">
+                    {formatDate(article.update_date, true)}
+                </div>
+            : <div className="text-base text-muted-foreground">
+                    {formatDate(article.create_date, true)}
+                </div>
+            }
+                {/* <span>{"/"}</span>
+                <div className="font-base text-base">
+                    {readingTime(article.body)}
+                </div> */}
+            </div>
+            {/* <div className="space-x-2">
                 {article.tags && article.tags.map((tag) => (
                     <BlogTags tag={tag} className="sm:text-sm" key={tag}/>
                 ))}
-            </div>
+            </div> */}
         </div>
     )
 }

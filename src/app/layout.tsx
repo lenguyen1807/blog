@@ -1,12 +1,15 @@
 import { Inter } from "next/font/google";
-import "@/styles/globals.css";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google"
 import { Metadata, Viewport } from 'next'
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Transition from "@/components/transition";
+import "@/styles/globals.css";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -55,14 +58,15 @@ export default function RootLayout({
           {/* import katex */}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossOrigin="anonymous" />
         </head>
-        <body className={cn("min-h-screen bg-background font-sans antialiased flex justify-center", inter.variable)}>
+        <body className={cn("antialiased flex justify-center font-sans max-w-2xl mb-40 flex-col md:flex-row mx-4 mt-8 sm:mx-auto", inter.variable)}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             // disableTransitionOnChange
           >
-            <main className="flex min-h-screen w-screen max-w-[60rem] flex-col items-center px-6 pb-10 pt-7 text-[0.92rem] leading-relaxed sm:px-10 lg:px-10">
+            {/* <main className="flex min-h-screen w-screen max-w-[50rem] flex-col items-center px-6 pb-10 pt-7 leading-relaxed sm:px-10 lg:px-10"> */}
+            <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
               <Header />
                 <Transition>
                   {children}

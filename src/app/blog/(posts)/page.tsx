@@ -6,7 +6,7 @@ export default async function Page() {
     const articles = GetAllArticlesSort(data);
 
     return (
-        <ul className="flex flex-col justify-start gap-y-8">
+        <ul className="space-y-8">
             {articles.map((article) => {
                 return (
                     <li key={article.name}>

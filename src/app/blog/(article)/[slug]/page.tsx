@@ -34,18 +34,27 @@ export default async function Page({params} : Props) {
 
     return (
         <div className={cn()}>
-            <div className="pt-2 xl:gap-x-20 xl:flex xl:items-start">
-                <aside className="hidden xl:block xl:sticky xl:top-20 xl:order-2 pb-16 xl:-me-60 xl:basis-60">
+             {/* <div className="pt-2 xl:gap-x-20 xl:flex xl:items-start">
+                <aside className="hidden xl:block xl:sticky xl:top-20 xl:order-2 xl:-me-60 xl:basis-60">
                     <Toc tocs={article.toc} />
                 </aside>
                 <div>
                     <BlogHeader article={article} />
                     <BlogContent 
                         content={article.body} 
-                        className="pt-10 max-w-none prose-a:no-underline hover:prose-a:underline prose-teal dark:prose-green" 
+                        className="pt-6 max-w-none prose-a:no-underline hover:prose-a:underline prose-teal dark:prose-green" 
                     />
                 </div>
             </div>
+            <BlogFooter />  */}
+            <BlogHeader article={article} />
+            <BlogContent 
+                content={article.body} 
+                className="pt-6 max-w-none prose-a:no-underline hover:prose-a:underline" 
+            />
+            {/* <div className="pt-2 xl:gap-y-20 xl:flex-col xl:items-start">
+                <Toc tocs={article.toc} />
+            </div> */}
             <BlogFooter />
         </div>
     )

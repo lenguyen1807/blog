@@ -15,7 +15,7 @@ export default function Toc({tocs, className} : TocProps) {
 
     return (
         <div className="relative w-max space-y-2">
-            <h2 className="text-lg border-b-2">Table of Contents</h2>
+            <div className="text-lg border-b-2"></div>
             <RenderToc tocs={tocs} />
         </div>
     )

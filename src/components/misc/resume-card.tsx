@@ -29,7 +29,7 @@ export default function ResumeCard({
     if (href) {
         return (
             <Link href={href}>
-                <Card className="relative rounded-2xl border-border shadow-sm border px-5 py-2 transition-all hover:border-foreground/50 hover:shadow-md">
+                <Card className="relative rounded-2xl border-border shadow-sm border px-5 py-2 transition-all hover:border-foreground/25 hover:shadow-md">
                     <div className="flex gap-x-6 items-center">
                         {imgPath && 
                             <Image

@@ -12,9 +12,8 @@ export function AboutMe() {
             <span className="font-bold">
                 {"Le Nguyen. "}
             </span>
-            {"I'm currently a senior student at University of Science - VNU HCMC, majoring in Artificial Intelligence. "}
-            {"I'm passionate about AI and Mathematics as well. "}
-            {"This blog is created to share what I've learnt. "}
+            {"I'm passionate about AI and Computer Science. "}
+            {"This blog is created to share what I've learnt and what I've done. "}
             {"Also, you can check my "}
             <a href="https://le-nguyen-garden.vercel.app/" className="hover:underline underline-offset-2 font-bold">
                 {"note page "}

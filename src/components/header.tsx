@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ModeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
-import EyeIcon from "./misc/eye-icon";
 
 function LinkLabel({title, href} : {title: string, href: string}) {
     return (
@@ -23,13 +22,12 @@ export default function Header() {
                 className="relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center"
             >
                 <Link
-                    className="flex-none text-xl font-semibold"
+                    className="flex-none text-xl font-semibold flex gap-x-2 group"
                     href="/"
                 >
-                    <div className="flex gap-x-3 items-center">
-                        <span>le nguyen</span>
-                        <EyeIcon />
-                    </div>
+                    <span className="block group-hover:hidden">{"ʕ´•ᴥ•`ʔ"}</span>
+                    <span className="hidden group-hover:block">{"⍝ʕ´•ᴥ•`ʔ⍝"}</span>
+                    <span>{"le nguyen"}</span>
                 </Link>
                 <div className="flex flex-row items-center justify-center">
                     <LinkLabel title="blog" href="/blog" />

@@ -24,7 +24,7 @@ export default function BlogFooter() {
         )
     } else {
         return (
-            <div className="pt-14">
+            <div className="pt-10">
                 <Button 
                     className="float-right"
                     variant="outline"
