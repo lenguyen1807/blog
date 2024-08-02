@@ -21,9 +21,9 @@ export default function ArticleCard({article} : ArticleCardProps) {
     return (
         <div className="flex flex-col gap-y-3 items-start">
             <Link href={`/blog/${article.name}`}>
-                <h2 className="text-xl hover:underline">{article.title}</h2>
+                <h2 className="text-lg hover:underline">{article.title}</h2>
             </Link>
-            <span className="text-muted-foreground text-base">
+            <span className="text-muted-foreground text-sm">
             {`
                 ${formatDate(article.create_date)} 
                 ${article.update_date ? `- ${formatDate(article.update_date)}` : ""}
