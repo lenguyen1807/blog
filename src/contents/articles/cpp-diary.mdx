@@ -1,0 +1,184 @@
+---
+title: Nhật ký C++ (03/08/2024)
+create_date: 08/03/2024
+tags:
+    - c++
+    - cpp_diary
+---
+
+### Smart Pointer
+
+- Thông thường khi ta dùng đến pointer, giả sử như pointer của class `Employee` đi, ta sẽ tạo như sau:
+```cpp
+Employee* ptr = new Employee();
+```
+- Khi tạo pointer, C++ sẽ tự động tìm phần memory trống trên bộ nhớ Heap để tạo `Employee* ptr` và sau đó trả về địa chỉ, ta cứ dùng địa chỉ ấy, hoặc không có thể dùng thẳng `Employee` bằng cách gọi `&ptr` (cái này còn có thuật ngữ là *dereference*, đơn giản là truy cập giá trị mà pointer đang trỏ tới).
+- Thế nhưng, khi C++ tạo `Employee* ptr` trên Heap thì nó sẽ không tự động xoá (khác với tạo trên Stack), do đó nếu không viết `delete ptr` thì sẽ có 2 vấn đề, bị lãng phí bộ nhớ.
+- Hiểu được như thế, từ C++11 ta có thứ mới gọi là *Smart Pointer*, dễ hiểu nhất thì là pointer tự động xoá còn sao để tự động xoá thì khá phức tạp đấy. 
+- Smart pointer trong C++ gồm 2 loại là `std::unique_ptr` và `std::shared_ptr`. Để hiểu rõ khác nhau thì trước tiên có 2 term mà ta cần để ý là *Ownership* và *Resource*. Đầu tiên thì Resource là phần mà pointer đang trỏ đến và Ownership nói đến có bao nhiêu "người" đang sở hữu Resource ấy (hay có bao nhiêu pointer đang trỏ đến).
+- Dựa theo tên thì `std::unique_ptr` chỉ có duy nhất 1 owner cho 1 resource còn `std::shared_ptr` thì nhiều owner cho 1 resource.
+
+```cpp
+// tạo unique_ptr cho Employee
+std::unique_ptr<Employee> uPtr = std::make_unique<Employee>();
+// tạo shared_ptr cho Employee
+std::shared_ptr<Employee> sPtr = std::make_shared<Employee>();
+```
+
+### Initilization
+
+- Ở C++11 ta có thêm một thứ gọi là *Uniform Initilization* (mình sẽ gọi tắt UI), nó như này:
+
+```cpp
+// tạo biến x = 7
+int x = 7;
+// cũng tạo biến x = 7
+// nhưng dùng uniform initialization, nhưng why :>
+// sao không dùng = cho nhanh
+int x {7};
+```
+
+- Một trong những thứ đầu tiên UI làm được là tránh đi "tính năng" *Narrowing* của C++. Narrowing đơn giản là bạn chuyển từ `float` sang `int` hay ngược lại (ngoài ra còn nhiều trường hợp nữa, tham khảo ở đây [^1]).
+
+```cpp
+float x = 7.3f;
+int y = x; // y = 7
+int y {x}; // báo lỗi
+```
+
+- Ngoài ra nhờ UI mà khi khởi tạo các `Struct, std::vector, ...` sẽ dễ thở hơn, ví dụ như:
+
+```cpp
+struct Employee
+{
+    int id;
+    std::string name;
+    int salary;
+};
+
+// khởi tạo 1 Employee bằng UI
+Employee a {1234, "Le Nguyen", 3};
+
+// khởi tạo 1 vector
+std::vector<int> v {1, 2, 3, 4, 5, 6};
+
+// khởi tạo array pointer
+int* arr = new int[5] {1, 2, 3, 4, 5};
+```
+
+### Conditional Statement
+
+Bạn có biết từ C++17 mình có thể tạo biến (hay gọi là *Initializers*) trong điều kiện `if-else` hay `switch` tương tự như vòng `for`. Ví dụ:
+
+```cpp
+for (int i = 0; i < 10; i++)
+{
+    // làm gì đó
+    // tạo biến i = 0 và chỉ vòng for mới sử dụng được
+}
+
+// Ở C++17 ta có thể làm như này
+if (int i = GetValueSomewhere(); i < 100)
+{
+    // làm gì đó
+    // và biến i chỉ có vòng if, bao gồm if, else if và else sử dụng
+}
+else
+{
+    // i >= 100
+    // làm gì đó
+}
+
+// Tương tự như switch
+switch (int i = GetValueSomewhere(); i)
+{
+case 100:
+    // làm gì đó
+    break;
+default:
+    break;
+}
+```
+
+### Attributes
+
+Từ C++17, ta có cái gọi là *Attributes*, cái này đơn giản là chỉ dẫn cho Compiler nên làm gì. Ví dụ như ta có vòng swtich như này:
+```cpp
+enum class Grade { Bad, Good, Excellent };
+
+switch (grade)
+{
+case Grade::Bad:
+    // làm gì đó
+    break;
+case Grade::Good:
+    // làm gì đó
+    // không có break
+case Grade::Excellent:
+    // làm gì đó
+    break;
+}
+```
+
+Có thể thấy ở ví dụ trên, khi không có `break` ở `case Grade::Good` thì C++ sẽ tự động chạy tiếp `case Grade::Excellent`, và Compiler sẽ tạo Warning không nên dùng như vậy, nhưng nếu là chủ ý của mình, thì ta có thể thêm Attributes `[[fallthrough]]` để cho C++ biết rằng đây là chủ ý:
+
+```cpp
+switch (grade)
+{
+// ...
+case Grade::Good:
+    // làm gì đó
+    // không có break
+    // thêm attribute
+    [[fallthrough]];
+case Grade::Excellent:
+    // làm gì đó
+    break;
+}
+```
+
+Ngoài ra còn nhiều Attributes khác, ví dụ như:
+- Giả sử ta có 1 hàm và hàm đó có return value, ta có thể dùng `[[nodiscard]]` để thông báo nếu người dùng không sử dụng return value ấy, ví dụ như:
+```cpp
+[[nodiscard]] int add(int a, int b)
+{
+    return a + b;
+}
+
+int main()
+{
+    int x = add(3, 4); // ok;
+    add(3, 4); // lỗi với [[nodiscard]]
+}
+```
+
+- Giả sử ta có một hàm có tham số nhưng không dùng đến tham số đó, ví dụ như đạo hàm của hàm Linear, ta có thể dùng `[[maybe_unused]]` như sau:
+
+```cpp
+// linear(x) chính là x
+int Linear(int x)
+{
+    return x;
+}
+
+// đạo hàm là 1
+int LinearGrad([[maybe_unused]] int x)
+{
+    return 1;
+}
+```
+- Ví dụ như có một hàm mà khi chạy hàm đó, chắc chắn chương trình sẽ dừng (không return), ví dụ như hàm tắt chương trình khi bị lỗi, ta có thể dùng `[[noreturn]]`:
+
+```cpp
+[[noreturn]] void Termination()
+{
+    // lỗi gì đó
+    // clean up
+    // sau đó thoát chương trình
+    std::exit(1);
+}
+```
+
+- Ngoài ra còn rất nhiều attribute khác nữa, có thể tham khảo thêm ở https://en.cppreference.com/w/cpp/language/attributes.
+
+[^1]: https://eel.is/c++draft/dcl.init.list#def:conversion,narrowing

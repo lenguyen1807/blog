@@ -1,18 +1,16 @@
 ---
 title: Mình làm Blog này như thế nào ?
 create_date: 07/07/2024
-update_date: 07/11/2024
+update_date: 08/03/2024
 tags: 
     - software
-    - study 
-draft: true
 ---
 
 ## Lý do mà mình làm Blog này
 
 Vào năm nhất mình có làm blog bằng [Jekyll](https://jekyllrb.com/) và sau đó thì mình chuyển qua dùng [Hugo](https://gohugo.io/). Nhưng mà nghĩ lại, mình cần có thứ gì đó của riêng mình, ngoài ra cũng nhờ việc mình phải động đến front-end ở môn Công nghệ phần mềm cho AI và cũng là lần đầu tiên mình động đến cái gọi là [React](https://react.dev/) và mỗi một thứ (kể là rất nhỏ) thì cũng có thể cần đến thư viện riêng (yes, I'm looking at you, Javascript developer). Thế nhưng đây vẫn là thiên thời địa lợi đối với mình, ngại gì không làm một blog cho riêng mình.
 
-Nói trắng ra thì blog mình đã dùng đến 80% thiết kế đến từ trang này rồi [^1] (rất là cảm ơn luôn 😭). Lúc đầu mình nghĩ sẽ thực hiện trên framework [Astro](https://astro.build/), thì cơ bản đây là một framework để dùng build blog rất mạnh (ngoài ra cái xịn nhất là page transition được build native) thế nhưng mình lại không biết dùng (thật ra là dùng không quen) 🥲 nên do đó mình quay lại dùng framework mà mình đã làm ở môn CNPM cho AI đó là [NextJS](https://nextjs.org/) và làm blog trên NextJS thì hơi chật vật tí.
+Nói trắng ra thì blog mình đã dùng đến 80% thiết kế đến từ trang này rồi [^1]. Lúc đầu mình nghĩ sẽ thực hiện trên framework [Astro](https://astro.build/), thì cơ bản đây là một framework để dùng build blog rất mạnh (ngoài ra cái xịn nhất là page transition được build native) thế nhưng mình lại không biết dùng (thật ra là dùng không quen) 🥲 nên do đó mình quay lại dùng framework mà mình đã làm ở môn CNPM cho AI đó là [NextJS](https://nextjs.org/) và làm blog trên NextJS thì hơi chật vật tí.
 
 ## Cách mình làm
 
@@ -181,7 +179,7 @@ với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 
 - [x] Add Google Analytics and Search Console.
 - [ ] Add SEO.
-- [x] Better Table of Contents (maybe nằm ở bên phải or trái).
+- [x] Better Table of Contents (maybe nằm ở bên phải or trái, mình quyết định bỏ luôn, nhìn hơi ngứa mắt 😑).
 - [ ] Post Search.
 - [ ] Page transition (cái này NextJS không support native nên khoai ác 😭, hiện tại mình có làm nhưng nhìn lôm côm quá, page được page không).
 - [ ] Pagination.
@@ -191,6 +189,6 @@ với $a$ là cạnh huyền, $b$ và $c$ là hai cạnh góc vuông.
 - [x] Improve MDX Loading Time (mình không biết có thể gọi là improve không, mình dùng `generateStaticParams` [^2] trong NextJS để build các post này thành HTML ở build time luôn, gọi là Static Site Generation [^3]).
 - [ ] Sitemap.
 
-[^1]: https://astro-theme-resume.vercel.app/
+[^1]: https://leerob.io/
 [^2]: https://nextjs.org/docs/app/api-reference/functions/generate-static-params
 [^3]: https://developer.mozilla.org/en-US/blog/static-site-generation-with-nextjs/

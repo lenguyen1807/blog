@@ -1,10 +1,8 @@
-import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { Metadata, Viewport } from 'next'
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { Inter } from "next/font/google";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -63,9 +61,7 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
             enableSystem
-            // disableTransitionOnChange
           >
-            {/* <main className="flex min-h-screen w-screen max-w-[50rem] flex-col items-center px-6 pb-10 pt-7 leading-relaxed sm:px-10 lg:px-10"> */}
             <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
               <Header />
                 <Transition>

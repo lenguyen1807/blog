@@ -1,7 +1,6 @@
 import { IArticle } from "@/lib/interface";
 import { cn, formatDate } from "@/lib/utils";
 import Link from "next/link";
-// import BlogTags from "./tags";
 // import { Badge } from "../ui/badge";
 // import {
 //   Card,
@@ -19,10 +18,21 @@ export interface ArticleCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function ArticleCard({article} : ArticleCardProps) {
     return (
-        <div className="flex flex-col gap-y-3 items-start">
+        <div className="flex flex-col gap-y-1 items-start">
             <Link href={`/blog/${article.name}`}>
                 <h2 className="text-lg hover:underline">{article.title}</h2>
             </Link>
+            <div className="flex gap-x-2 text-sm text-muted-foreground">
+                {article.tags && article.tags.map((tag) => (
+                    <Link 
+                        key={tag} 
+                        href={`/blog/tags/${tag}`} 
+                        className="hover:text-primary"
+                    >
+                        {`#${tag}`}
+                    </Link>
+                ))}
+            </div>
             <span className="text-muted-foreground text-sm">
             {`
                 ${formatDate(article.create_date)} 

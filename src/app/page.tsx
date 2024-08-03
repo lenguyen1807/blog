@@ -50,7 +50,7 @@ export default function Home() {
           <Icon name="Python" content="I love how easy it is (not that easy, it is only easy when compare to C++). In AI, this is the first class language, a lot of supports and users, so why don't use this 🤷‍♂️." />
           <Icon name="Typescript" content="Fun fact: I don't know Javascript and Typescript is the first web language I used. And I love it but sometimes I have to wonder if I can punch myself in the face when type errors came up." />
           <Icon name="Pytorch" content="Just don't use Tensorflow bro, Pytorch is and always has been the first class framework for deep learning." />
-          <Icon name="Docker" content="I use this for Anaconda. I don't want something wrong in Conda and my whole system breaks 🥲." />
+          <Icon name="Docker" content="I use this for Anaconda. I don't want something wrong in Conda and breaks my whole system 🥲." />
           <Icon name="Next" content="The first framework I used and this took my hand to the world of Web. Use this for my blog (this blog) too." />
         </div>
       </TextSection>
