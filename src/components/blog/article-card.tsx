@@ -36,8 +36,8 @@ export default function ArticleCard({article} : ArticleCardProps) {
             <span className="text-muted-foreground text-sm">
             {`
                 ${formatDate(article.create_date)} 
-                ${article.update_date ? `- ${formatDate(article.update_date)}` : ""}
-           `}
+                ${article.update_date ? `- ${formatDate(article.update_date, true)}` : ""}
+            `}
             </span>
         </div>
         // <Card className="rounded-md border-2 border-border shadow-sm transition-all hover:border-foreground/25 hover:shadow-md">

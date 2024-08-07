@@ -56,7 +56,7 @@ export default function RootLayout({
           {/* import katex */}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossOrigin="anonymous" />
         </head>
-        <body className={cn("antialiased flex justify-center font-sans max-w-2xl mb-40 flex-col md:flex-row mx-4 mt-8 sm:mx-auto", inter.variable)}>
+        <body className={cn("antialiased flex justify-center font-sans max-w-2xl mb-14 flex-col md:flex-row mx-4 mt-8 sm:mx-auto", inter.variable)}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

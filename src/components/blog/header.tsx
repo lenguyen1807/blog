@@ -16,10 +16,10 @@ export default function BlogHeader({article, className} : BlogHeaderProps) {
             <div className="flex items-center gap-1.5">
             {article.update_date
             ? <div className="text-base text-muted-foreground">
-                    {formatDate(article.update_date, true)}
+                    {formatDate(article.update_date, false)}
                 </div>
             : <div className="text-base text-muted-foreground">
-                    {formatDate(article.create_date, true)}
+                    {formatDate(article.create_date, false)}
                 </div>
             }
             </div>

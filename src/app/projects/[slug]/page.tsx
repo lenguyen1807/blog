@@ -18,16 +18,17 @@ export default async function Page({params} : Props) {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full space-y-10">
             <Button variant="outline" className="h-8 w-20">
                 <Link href="/projects" className="flex">
                     <Undo2 className="h-5 w-5 mr-2" />
                     Back
                 </Link>
             </Button>
-            <div className="py-14 gap-x-20 lg:flex lg:items-start"> 
-                <BlogContent content={project.body} />
-            </div>
+            <BlogContent 
+                content={project.body} 
+                className="pt-6 max-w-none prose-a:no-underline hover:prose-a:underline" 
+            />
             <BlogFooter />
         </div>
     )

@@ -37,13 +37,13 @@ export default function Layout({
             {/* <span className="border-l-2 pl-6 text-base">
                 <strong>Note:</strong> If you see a page loading for too long, just press back button and click to it again or reload it. I'm sorry but I can't fix it 😞.
             </span> */}
-            <div className="w-full">
-                {/* <Button variant="outline" className="h-8 w-20">
+            <div className="max-w-full space-y-2">
+                <Button variant="outline" className="h-8 w-20">
                     <Link href="/blog" className="flex">
                         <Undo2 className="h-5 w-5 mr-2" />
                         Back
                     </Link>
-                </Button> */}
+                </Button>
                 {children}
             </div>
         </div>
